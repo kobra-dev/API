@@ -12,6 +12,4 @@ app.post("/datasetUpload", upload.array(), function (req, res, next) {
   const datasetName = req.body.datasetname;
 });
 
-app.listen(port, () =>
-  console.log(`Example app listening at http://localhost:${port}`)
-);
+app.listen(port, () => console.log("app running"));
