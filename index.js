@@ -1,9 +1,13 @@
+require("dotenv").config();
+
 const app = require("express")();
 const multer = require("multer");
 const AWS = require("aws-sdk");
 const port = 3000;
 
 var upload = multer();
+
+console.log(process.env.SECRET_KEY);
 
 app.post("/datasetUpload", upload.array(), function (req, res, next) {
   //get file and upload to digitalocean spaces
