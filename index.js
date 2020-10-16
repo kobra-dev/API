@@ -3,6 +3,8 @@ require("dotenv").config();
 const app = require("express")();
 const multer = require("multer");
 const AWS = require("aws-sdk");
+const { v4: uuidv4 } = require("uuid");
+
 const port = 3000;
 
 var upload = multer();
@@ -28,7 +30,7 @@ app.post("/datasetUpload", upload.array(), function (req, res, next) {
   var params = {
     Body: dataset,
     Bucket: "kobra",
-    Key: "file.ext",
+    Key: `${uuidv4()}`,
   };
 });
 
