@@ -15,15 +15,11 @@ app.post("/datasetUpload", upload.single("dataset"), function (req, res, next) {
 
   const spacesEndpoint = new AWS.Endpoint("sfo2.digitaloceanspaces.com");
 
-  console.log(spacesEndpoint);
-
   const s3 = new AWS.S3({
     endpoint: spacesEndpoint,
     accessKeyId: process.env.ACCESS_KEY,
     secretAccessKey: process.env.SECRET_KEY,
   });
-
-  console.log(s3);
 
   let key = uuidv4();
 
@@ -38,10 +34,15 @@ app.post("/datasetUpload", upload.single("dataset"), function (req, res, next) {
     else console.log(data);
   });
 
-  console.log(key);
-
   res.json({
     key: key,
+  });
+});
+
+app.post("/getDataset", function (req, res, next) {
+  console.log(req.params.filename);
+  res.json({
+    filename: req.params.filename,
   });
 });
 
