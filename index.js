@@ -39,6 +39,8 @@ app.post("/datasetUpload", upload.array(), function (req, res, next) {
   });
 
   res.json({
+    user: user,
+    datasetName: datasetName,
     key: key,
   });
 });
