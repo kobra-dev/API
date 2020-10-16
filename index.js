@@ -9,8 +9,6 @@ const port = 3000;
 
 var upload = multer();
 
-console.log(process.env.SECRET_KEY);
-
 app.post("/datasetUpload", upload.array(), function (req, res, next) {
   //get file and upload to digitalocean spaces
   const dataset = req.files[0];
