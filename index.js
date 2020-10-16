@@ -9,11 +9,9 @@ const port = 3000;
 
 var upload = multer();
 
-app.post("/datasetUpload", upload.array(), function (req, res, next) {
+app.post("/datasetUpload", upload.single("dataset"), function (req, res, next) {
   //get file and upload to digitalocean spaces
-  const dataset = req.files[0];
-  const user = req.body.username;
-  const datasetName = req.body.datasetname;
+  const dataset = req.file;
 
   const spacesEndpoint = new AWS.Endpoint(
     "https://sfo2.digitaloceanspaces.com"
@@ -39,8 +37,6 @@ app.post("/datasetUpload", upload.array(), function (req, res, next) {
   });
 
   res.json({
-    user: user,
-    datasetName: datasetName,
     key: key,
   });
 });
