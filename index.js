@@ -27,15 +27,21 @@ app.post("/datasetUpload", upload.array(), function (req, res, next) {
     secretAccessKey: process.env.SECRET_KEY,
   });
 
+  let key = uuidv4();
+
   var params = {
     Body: dataset,
     Bucket: "kobra",
-    Key: `${uuidv4()}`,
+    Key: `${key}`,
   };
 
   s3.putObject(params, function (err, data) {
     if (err) console.log(err, err.stack);
     else console.log(data);
+  });
+
+  res.json({
+    key: key,
   });
 });
 
