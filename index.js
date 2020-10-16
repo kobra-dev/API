@@ -14,7 +14,7 @@ app.post("/datasetUpload", upload.single("dataset"), function (req, res, next) {
   const dataset = req.file;
 
   const spacesEndpoint = new AWS.Endpoint(
-    "https://sfo2.digitaloceanspaces.com"
+    "https://kobra.sfo2.digitaloceanspaces.com"
   );
 
   console.log(spacesEndpoint);
