@@ -32,6 +32,11 @@ app.post("/datasetUpload", upload.array(), function (req, res, next) {
     Bucket: "kobra",
     Key: `${uuidv4()}`,
   };
+
+  s3.putObject(params, function (err, data) {
+    if (err) console.log(err, err.stack);
+    else console.log(data);
+  });
 });
 
 app.listen(port, () => console.log(`port ${port}`));
