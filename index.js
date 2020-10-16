@@ -23,7 +23,7 @@ app.post("/datasetUpload", upload.single("dataset"), function (req, res, next) {
 
   let key = uuidv4();
 
-  var params = {
+  const params = {
     Body: encodedDataset,
     Bucket: "kobra",
     Key: `${key}`,
@@ -44,6 +44,11 @@ app.post("/getDataset/:filename", function (req, res, next) {
   res.json({
     filename: req.params.filename,
   });
+
+  const params = {
+    Bucket: "kobra",
+    Key: req.params.fileName,
+  };
 });
 
 app.listen(port, () => console.log(`port ${port}`));
