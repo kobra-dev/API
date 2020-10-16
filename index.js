@@ -39,7 +39,7 @@ app.post("/datasetUpload", upload.single("dataset"), function (req, res, next) {
   });
 });
 
-app.post("/getDataset", function (req, res, next) {
+app.post("/getDataset/:filename", function (req, res, next) {
   console.log(req.params.filename);
   res.json({
     filename: req.params.filename,
