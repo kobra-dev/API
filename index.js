@@ -11,11 +11,9 @@ var upload = multer();
 
 app.post("/datasetUpload", upload.single("dataset"), function (req, res, next) {
   //get file and upload to digitalocean spaces
-  const dataset = req.file;
+  const encodedDataset = req.file.buffer.toString("base64");
 
-  const spacesEndpoint = new AWS.Endpoint(
-    "https://kobra.sfo2.digitaloceanspaces.com"
-  );
+  const spacesEndpoint = new AWS.Endpoint("sfo2.digitaloceanspaces.com");
 
   console.log(spacesEndpoint);
 
@@ -30,7 +28,7 @@ app.post("/datasetUpload", upload.single("dataset"), function (req, res, next) {
   let key = uuidv4();
 
   var params = {
-    Body: dataset,
+    Body: encodedDataset,
     Bucket: "kobra",
     Key: `${key}`,
   };
