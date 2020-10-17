@@ -49,6 +49,14 @@ app.post("/getDataset/:filename", function (req, res, next) {
     Bucket: "kobra",
     Key: req.params.fileName,
   };
+
+  const spacesEndpoint = new AWS.Endpoint("sfo2.digitaloceanspaces.com");
+
+  const s3 = new AWS.S3({
+    endpoint: spacesEndpoint,
+    accessKeyId: process.env.ACCESS_KEY,
+    secretAccessKey: process.env.SECRET_KEY,
+  });
 });
 
 app.listen(port, () => console.log(`port ${port}`));
