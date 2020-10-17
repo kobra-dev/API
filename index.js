@@ -67,7 +67,7 @@ app.post("/getDataset/:filename", function (req, res, next) {
     const dataset = data.Body;
 
     res.json({
-      data: dataset,
+      data: bin2string(dataset),
     });
   });
 });
