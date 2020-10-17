@@ -39,13 +39,14 @@ app.post("/datasetUpload", upload.single("dataset"), function (req, res, next) {
   });
 });
 
-function bin2string(array) {
+// credit for this to
+const bin2string = (array) => {
   var result = "";
   for (var i = 0; i < array.length; ++i) {
     result += String.fromCharCode(array[i]);
   }
   return result;
-}
+};
 
 app.post("/getDataset/:filename", function (req, res, next) {
   const params = {
