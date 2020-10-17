@@ -54,8 +54,6 @@ app.post("/getDataset/:filename", function (req, res, next) {
     Key: req.params.filename,
   };
 
-  console.log(params);
-
   const spacesEndpoint = new AWS.Endpoint("sfo2.digitaloceanspaces.com");
 
   const s3 = new AWS.S3({
