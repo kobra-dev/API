@@ -9,6 +9,8 @@ const port = 3000;
 
 var upload = multer();
 
+// Use this key for testing: 5ccf40d8-1123-4d17-8ad7-cff6e94be703
+
 app.post("/datasetUpload", upload.single("dataset"), function (req, res, next) {
   //get file and upload to digitalocean spaces
   const encodedDataset = req.file.buffer.toString("base64");
@@ -48,6 +50,7 @@ const bin2string = (array) => {
   return result;
 };
 
+// Use this key for testing: 5ccf40d8-1123-4d17-8ad7-cff6e94be703
 app.post("/getDataset/:filename", function (req, res, next) {
   const params = {
     Bucket: "kobra",
@@ -63,12 +66,18 @@ app.post("/getDataset/:filename", function (req, res, next) {
   });
 
   s3.getObject(params, function (error, data) {
-    var dataset = data.Body;
-    dataset = Buffer.from(bin2string(dataset), "base64").toString();
+    if (error) {
+      res.json({
+        error: "error fetching datast",
+      });
+    } else {
+      var dataset = data.Body;
+      dataset = Buffer.from(bin2string(dataset), "base64").toString();
 
-    res.json({
-      data: dataset,
-    });
+      res.json({
+        data: dataset,
+      });
+    }
   });
 });
 
