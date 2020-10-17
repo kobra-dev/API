@@ -64,10 +64,11 @@ app.post("/getDataset/:filename", function (req, res, next) {
   });
 
   s3.getObject(params, function (error, data) {
-    const dataset = data.Body;
+    var dataset = data.Body;
+    dataset = Buffer.from(bin2string(dataset), "base64").toString();
 
     res.json({
-      data: bin2string(dataset),
+      data: dataset,
     });
   });
 });
