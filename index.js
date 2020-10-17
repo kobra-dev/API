@@ -39,16 +39,21 @@ app.post("/datasetUpload", upload.single("dataset"), function (req, res, next) {
   });
 });
 
-app.post("/getDataset/:filename", function (req, res, next) {
-  console.log(req.params.filename);
-  res.json({
-    filename: req.params.filename,
-  });
+function bin2string(array) {
+  var result = "";
+  for (var i = 0; i < array.length; ++i) {
+    result += String.fromCharCode(array[i]);
+  }
+  return result;
+}
 
+app.post("/getDataset/:filename", function (req, res, next) {
   const params = {
     Bucket: "kobra",
-    Key: req.params.fileName,
+    Key: req.params.filename,
   };
+
+  console.log(params);
 
   const spacesEndpoint = new AWS.Endpoint("sfo2.digitaloceanspaces.com");
 
@@ -56,6 +61,14 @@ app.post("/getDataset/:filename", function (req, res, next) {
     endpoint: spacesEndpoint,
     accessKeyId: process.env.ACCESS_KEY,
     secretAccessKey: process.env.SECRET_KEY,
+  });
+
+  s3.getObject(params, function (error, data) {
+    const dataset = data.Body;
+
+    res.json({
+      data: dataset,
+    });
   });
 });
 
