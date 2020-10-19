@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/kobra-dev/API",
-  "author": "Pranav Teegavarapu <pranavnt@outlook.com>",
+  "author": "Pranav Teegavarapu | Benjamin Smith <pranavnt@outlook.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "nodemon -w src --ext ts --exec ts-node src/app.ts"
+  },
   "dependencies": {
     "@types/mongodb": "^3.5.28",
     "@types/node": "^14.11.10",
