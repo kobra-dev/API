@@ -67,6 +67,7 @@ app.post("/getDataset/:filename", function (req, res, next) {
 
   s3.getObject(params, function (error, data) {
     if (error) {
+      console.log(error);
       res.json({
         error: "error fetching datast",
       });
