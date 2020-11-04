@@ -1,27 +1,47 @@
 type Query {
-    info: String!,
-    projects: [Project!]!
-    project(user: String!, shortname: String!): Project
-    datasets: [Dataset!]!
-    dataset: Dataset!
-    getDatasetContents(shortname: String!) : String
+  info: String!
+  projects: [Project!]!
+  project(user: String!, shortname: String!): Project
+  datasets: [Dataset!]!
+  dataset: Dataset!
+  getDatasetContents(shortname: String!): String
 }
 type Mutation {
-    createProject(user: String!, name: String!, description: String, projectJson: String): Project!
-    updateProject(shortname: String!, name: String, description: String, projectJson: String) : Boolean!
-    createDataset(user: String!, name: String!, description: String, contents: String) : Dataset!
-    updateDataset(shortname: String!, name: String, description: String, contents:  String) : Boolean!
+  createProject(
+    user: String!
+    name: String!
+    description: String
+    projectJson: String
+  ): Project!
+  updateProject(
+    shortname: String!
+    name: String
+    description: String
+    projectJson: String
+  ): Boolean!
+  createDataset(
+    user: String!
+    name: String!
+    description: String
+    contents: String
+  ): Dataset!
+  updateDataset(
+    shortname: String!
+    name: String
+    description: String
+    contents: String
+  ): Boolean!
 }
 type Project {
-    user: String!
-    name: String!
-    shortname: String!
-    description: String!
-    projectJson: String!
+  user: String!
+  name: String!
+  shortname: String!
+  description: String!
+  projectJson: String!
 }
 type Dataset {
-    user: String!
-    name: String!
-    shortname: String!
-    description: String!
+  user: String!
+  name: String!
+  shortname: String!
+  description: String!
 }

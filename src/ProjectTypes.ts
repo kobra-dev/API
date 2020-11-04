@@ -1,4 +1,4 @@
-import { ArgsType, Field, ID, InputType, ObjectType } from "type-graphql";
+import { ArgsType, Field, ID, ObjectType } from "type-graphql";
 
 @ObjectType()
 export class Project {
@@ -11,11 +11,17 @@ export class Project {
     @Field()
     name: string;
 
+    @Field()
+    isPublic: boolean;
+
     @Field({ nullable: true })
     description?: string;
 
     @Field({ nullable: true })
     projectJson?: string;
+
+    @Field()
+    lastModified: Date;
 }
 
 @ArgsType()
@@ -25,6 +31,9 @@ export class NewProjectInput {
 
     @Field()
     name: string;
+
+    @Field()
+    isPublic: boolean;
     
     @Field({ nullable: true })
     description?: string;
@@ -40,6 +49,9 @@ export class EditProjectInput {
     
     @Field({ nullable: true })
     description?: string;
+
+    @Field({ nullable: true })
+    isPublic?: boolean;
     
     @Field({ nullable: true })
     projectJson?: string;
@@ -49,8 +61,10 @@ export interface DBProject {
     _id: string;
     user: string;
     name: string;
+    isPublic: boolean;
     description?: string;
     projectJson?: string;
+    lastModified: Date;
 }
 
 @ObjectType()
