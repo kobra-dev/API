@@ -1,5 +1,7 @@
 require("dotenv").config();
 
+import { Request, Response } from 'express';
+
 const app = require("express")();
 const multer = require("multer");
 const AWS = require("aws-sdk");
@@ -11,7 +13,7 @@ var upload = multer();
 
 // Use this key for testing: 5ccf40d8-1123-4d17-8ad7-cff6e94be703
 
-app.post("/datasetUpload", upload.single("dataset"), function (req, res, next) {
+app.post("/datasetUpload", upload.single("dataset"), function (req:Request, res:Response) {
   //get file and upload to digitalocean spaces
   const encodedDataset = req.file.buffer.toString("base64");
 
@@ -42,7 +44,7 @@ app.post("/datasetUpload", upload.single("dataset"), function (req, res, next) {
 });
 
 // credit for this to
-const bin2string = (array) => {
+const bin2string = (array:number[]) => {
   var result = "";
   for (var i = 0; i < array.length; ++i) {
     result += String.fromCharCode(array[i]);
@@ -51,7 +53,7 @@ const bin2string = (array) => {
 };
 
 // Use this key for testing: 5ccf40d8-1123-4d17-8ad7-cff6e94be703
-app.post("/getDataset/:filename", function (req, res, next) {
+app.post("/getDataset/:filename", function (req:Request, res:Response) {
   const params = {
     Bucket: "kobra",
     Key: req.params.filename,
