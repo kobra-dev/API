@@ -12,8 +12,8 @@ const port = 3000;
 var upload = multer();
 
 // Use this key for testing: 5ccf40d8-1123-4d17-8ad7-cff6e94be703
-
-app.post("/datasetUpload", upload.single("dataset"), function (req:Request, res:Response) {
+// @ts-ignore
+app.post("/datasetUpload", upload.single("dataset"), function (req, res) {
   //get file and upload to digitalocean spaces
   const encodedDataset = req.file.buffer.toString("base64");
 
@@ -33,7 +33,7 @@ app.post("/datasetUpload", upload.single("dataset"), function (req:Request, res:
     Key: `${key}`,
   };
 
-  s3.putObject(params, function (err, data) {
+  s3.putObject(params, function (err:any, data:any) {
     if (err) console.log(err, err.stack);
     else console.log(data);
   });
@@ -67,7 +67,7 @@ app.post("/getDataset/:filename", function (req:Request, res:Response) {
     secretAccessKey: process.env.SECRET_KEY,
   });
 
-  s3.getObject(params, function (error, data) {
+  s3.getObject(params, function (error: any, data:any) {
     if (error) {
       console.log(error);
       res.json({
