@@ -2,5 +2,11 @@ FROM node:12
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
-RUN yarn install
+COPY package.json /usr/src/app
+COPY yarn.lock /usr/src/app
+RUN yarn install 
+
+COPY . /usr/src/app 
+
+CMD yarn start 
+EXPOSE 4001
