@@ -6,7 +6,7 @@
   "author": "Pranav Teegavarapu | Benjamin Smith <pranavnt@outlook.com>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon -w src --ext ts --exec ts-node src/app.ts"
+    "start": "nodemon -w src --ext ts --exec ts-node src/app.ts",
     "prod": "nodemon -w src --ext ts --exec ts-node src/app.ts"
   },
   "dependencies": {
