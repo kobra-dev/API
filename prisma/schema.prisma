@@ -1,0 +1,29 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  // TODO: make this use PostgreSQL
+  provider = "sqlite"
+  url      =  "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator typegraphql {
+  provider = "typegraphql-prisma"
+  output = "../prisma/generated/type-graphql"
+}
+
+// TODO: add native types (like @db.VarChar(255)), can't do it right now because sqlite doesn't support it
+model Project {
+  id String @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user String
+  name String
+  isPublic Boolean
+  description String?
+  projectJson String?
+}

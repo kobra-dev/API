@@ -1,27 +1,18 @@
-import { ArgsType, Field, ID, ObjectType } from "type-graphql";
+import { ArgsType, Field } from "type-graphql";
 
-@ObjectType()
-export class Project {
-    @Field(type => ID)
-    id: string;
-
-    @Field()
-    user: string;
-
-    @Field()
-    name: string;
-
-    @Field()
-    isPublic: boolean;
+@ArgsType()
+export class ProjectsFilter {
+    @Field({ nullable: true })
+    user?: string;
 
     @Field({ nullable: true })
-    description?: string;
+    searchTerm?: string;
 
     @Field({ nullable: true })
-    projectJson?: string;
+    skip?: number;
 
-    @Field()
-    lastModified: Date;
+    @Field({ nullable: true })
+    take?: number
 }
 
 @ArgsType()
@@ -55,32 +46,4 @@ export class EditProjectInput {
     
     @Field({ nullable: true })
     projectJson?: string;
-}
-
-export interface DBProject {
-    _id: string;
-    user: string;
-    name: string;
-    isPublic: boolean;
-    description?: string;
-    projectJson?: string;
-    lastModified: Date;
-}
-
-@ObjectType()
-export class AddProjectStatus {
-    @Field()
-    id: string;
-
-    @Field()
-    success: boolean;
-}
-
-@ObjectType()
-export class EditProjectStatus {
-    @Field()
-    success: boolean;
-
-    @Field()
-    nModified: number;
 }
