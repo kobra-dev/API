@@ -18,9 +18,6 @@ export class ProjectsFilter {
 @ArgsType()
 export class NewProjectInput {
     @Field()
-    user: string;
-
-    @Field()
     name: string;
 
     @Field()

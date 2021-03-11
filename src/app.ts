@@ -1,19 +1,38 @@
+//#region Imports
+
+// GraphQL
 import { ApolloServer } from "apollo-server";
 import "reflect-metadata";
-import { Arg, Args, Authorized, buildSchema, Ctx, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Args, buildSchema, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import { Container, Inject, Service } from "typedi";
-import { auth0AuthChecker } from "./authChecker";
-import jwt, { JwtHeader, SigningKeyCallback, VerifyOptions } from 'jsonwebtoken';
-import jwksClient from 'jwks-rsa';
-import { NewProjectInput, EditProjectInput, ProjectsFilter } from "./ProjectTypes";
+
+// Auth
+import FirebaseAdmin from "firebase-admin";
+import fs from "fs";
+
+// Prisma
 import { PrismaClient } from "@prisma/client";
 import { Project } from "../prisma/generated/type-graphql";
-import { nanoid } from "nanoid";
 
+// Misc
+import { nanoid } from "nanoid";
 import dotenv from "dotenv";
+
+// Business logic
+import { NewProjectInput, EditProjectInput, ProjectsFilter } from "./ProjectTypes";
+import { NotFoundError, NotAuthorizedError } from "./errors";
+
+//#endregion
+
 dotenv.config();
 
 const prisma = new PrismaClient();
+
+FirebaseAdmin.initializeApp({
+    credential: FirebaseAdmin.credential.cert(
+        JSON.parse(fs.readFileSync("./firebase-key.json", "utf-8"))
+    )
+});
 
 @Service()
 @Resolver(Project)
@@ -21,18 +40,23 @@ class ProjectResolver {
     @Inject("PRISMA")
     p: PrismaClient;
 
-    @Authorized()
     @Query(returns => Project, { nullable: true })
-    async project(@Arg("id") id: string) {
-        return await this.p.project.findFirst({
+    async project(@Arg("id") id: string, @Ctx() context: Context) {
+        const proj = await this.p.project.findFirst({
             where: {
                 id
             }
         });
+
+        if(!proj || (!proj.isPublic && proj.user !== context.user?.uid))
+            // If the user cannot access the project don't indicate that the project exists
+            throw new NotFoundError(`Project with ID ${id} not found`);
+
+        return proj;
     }
 
     @Query(returns => [Project])
-    async projects(@Args() filter: ProjectsFilter, @Ctx() context: any) {
+    async projects(@Args() filter: ProjectsFilter, @Ctx() context: Context) {
         return await this.p.project.findMany({
             where: {
                 ...(filter.user ? {
@@ -44,29 +68,55 @@ class ProjectResolver {
                         // TODO: fix this
                         //mode: "insensitive"
                     }
-                } : undefined)
+                } : undefined),
+                OR: [
+                    {
+                        user: context.user?.uid
+                    },
+                    {
+                        isPublic: true
+                    }
+                ]
             },
             skip: filter.skip,
             take: filter.take
         });
     }
 
-    @Authorized()
     @Mutation(returns => Project)
-    async addProject(@Args() newProjectData: NewProjectInput, @Ctx() context: any): Promise<Project> {
-        console.log(context);
-        console.log(await context.user);
+    async addProject(@Args() newProjectData: NewProjectInput, @Ctx() context: Context) {
+        if(!context.user) throw new NotAuthorizedError("Must include ID token to add project");
         return await this.p.project.create({
             data: {
                 id: nanoid(),
-                // TODO: get user from the context
+                user: context.user.uid,
                 ...newProjectData
             }
         });
     }
 
+    async verifyUserCanModifyProject(id: string, context: Context) {
+        if(!context.user) throw new NotAuthorizedError("Must include ID token to modify project");
+        const proj = await this.p.project.findFirst({
+            where: {
+                id
+            }
+        });
+
+        const canEdit = proj?.user === context.user.id;
+
+        if(!proj || (!canEdit && !proj.isPublic)) {
+            throw new NotFoundError(`Project with ID ${id} not found`);
+        }
+        else if(!canEdit) {
+            throw new NotAuthorizedError("Project user does not match ID token user");
+        }
+    }
+
     @Mutation(returns => Project)
-    async editProject(@Arg("id") id: string, @Args() editProjectData: EditProjectInput): Promise<Project> {
+    async editProject(@Arg("id") id: string, @Args() editProjectData: EditProjectInput, @Ctx() context: Context) {
+        await this.verifyUserCanModifyProject(id, context);
+
         return await this.p.project.update({
             where: {
                 id
@@ -76,7 +126,9 @@ class ProjectResolver {
     }
 
     @Mutation(returns => Project)
-    async removeProject(@Arg("id") id: string) {
+    async removeProject(@Arg("id") id: string, @Ctx() context: Context) {
+        await this.verifyUserCanModifyProject(id, context);
+
         await this.p.project.delete({
             where: {
                 id
@@ -88,48 +140,31 @@ class ProjectResolver {
 // Dependency injection
 Container.set("PRISMA", prisma);
 
-// Authorization
-const authClient = jwksClient({
-    jwksUri: `${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`
-});
-
-function getKey(header: JwtHeader, cb: SigningKeyCallback) {
-    if(header.kid === undefined) return;
-    authClient.getSigningKey(header.kid, function (err, key) {
-        var signingKey = key.getPublicKey();
-        cb(null, signingKey);
-    });
+export interface Context {
+    user: FirebaseAdmin.auth.DecodedIdToken | undefined
 }
-
-const authOptions: VerifyOptions = {
-    audience: process.env.AUTH0_AUDIENCE,
-    issuer: `${process.env.AUTH0_DOMAIN}/`,
-    algorithms: ['RS256']
-};
 
 async function main() {
     const schema = await buildSchema({
         resolvers: [ProjectResolver],
-        authChecker: auth0AuthChecker,
+        //authChecker,
         container: Container
     });
 
     const server = new ApolloServer({
         schema,
         playground: true,
-        context: ({ req }) => {
+        context: async ({ req }): Promise<Context> => {
             const token = req.headers.authorization;
-            if(token === undefined) return { undefined };
-            const user = new Promise((resolve, reject) => {
-                console.log(token);
-                jwt.verify(token, getKey, authOptions, (err, decoded) => {
-                    if(err) return reject(err);
-                    // @ts-ignore
-                    resolve(decoded);
-                })
-            });
-
-            return { user };
+            if(token === undefined) return { user: undefined };
+            try {
+                return {
+                    user: await FirebaseAdmin.auth().verifyIdToken(token)
+                };
+            }
+            catch(error) {
+                throw new Error("Invalid auth token");
+            }
         }
     });
 
