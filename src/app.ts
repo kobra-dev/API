@@ -103,7 +103,7 @@ class ProjectResolver {
             }
         });
 
-        const canEdit = proj?.user === context.user.id;
+        const canEdit = proj?.user === context.user.uid;
 
         if(!proj || (!canEdit && !proj.isPublic)) {
             throw new NotFoundError(`Project with ID ${id} not found`);
