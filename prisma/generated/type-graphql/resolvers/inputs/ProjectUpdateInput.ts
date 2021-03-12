@@ -6,6 +6,7 @@ import { BoolFieldUpdateOperationsInput } from "../inputs/BoolFieldUpdateOperati
 import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
 import { NullableStringFieldUpdateOperationsInput } from "../inputs/NullableStringFieldUpdateOperationsInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
+import { UserUpdateOneRequiredWithoutProjectsInput } from "../inputs/UserUpdateOneRequiredWithoutProjectsInput";
 
 @TypeGraphQL.InputType({
   isAbstract: true
@@ -29,11 +30,6 @@ export class ProjectUpdateInput {
   @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
     nullable: true
   })
-  user?: StringFieldUpdateOperationsInput | undefined;
-
-  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
-    nullable: true
-  })
   name?: StringFieldUpdateOperationsInput | undefined;
 
   @TypeGraphQL.Field(_type => BoolFieldUpdateOperationsInput, {
@@ -50,4 +46,9 @@ export class ProjectUpdateInput {
     nullable: true
   })
   projectJson?: NullableStringFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => UserUpdateOneRequiredWithoutProjectsInput, {
+    nullable: true
+  })
+  user?: UserUpdateOneRequiredWithoutProjectsInput | undefined;
 }

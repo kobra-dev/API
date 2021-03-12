@@ -6,6 +6,7 @@ import { BoolFilter } from "../inputs/BoolFilter";
 import { DateTimeFilter } from "../inputs/DateTimeFilter";
 import { StringFilter } from "../inputs/StringFilter";
 import { StringNullableFilter } from "../inputs/StringNullableFilter";
+import { UserRelationFilter } from "../inputs/UserRelationFilter";
 
 @TypeGraphQL.InputType({
   isAbstract: true
@@ -41,10 +42,15 @@ export class ProjectWhereInput {
   })
   updatedAt?: DateTimeFilter | undefined;
 
+  @TypeGraphQL.Field(_type => UserRelationFilter, {
+    nullable: true
+  })
+  user?: UserRelationFilter | undefined;
+
   @TypeGraphQL.Field(_type => StringFilter, {
     nullable: true
   })
-  user?: StringFilter | undefined;
+  userId?: StringFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringFilter, {
     nullable: true

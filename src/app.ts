@@ -12,7 +12,7 @@ import fs from "fs";
 
 // Prisma
 import { PrismaClient } from "@prisma/client";
-import { Project } from "../prisma/generated/type-graphql";
+import { Project, User, relationResolvers } from "../prisma/generated/type-graphql";
 
 // Misc
 import { nanoid } from "nanoid";
@@ -45,10 +45,17 @@ class ProjectResolver {
         const proj = await this.p.project.findFirst({
             where: {
                 id
+            },
+            include: {
+                user: {
+                    select: {
+                        name: true
+                    }
+                }
             }
         });
 
-        if(!proj || (!proj.isPublic && proj.user !== context.user?.uid))
+        if(!proj || (!proj.isPublic && proj.userId !== context.user?.uid))
             // If the user cannot access the project don't indicate that the project exists
             throw new NotFoundError(`Project with ID ${id} not found`);
 
@@ -60,7 +67,7 @@ class ProjectResolver {
         return await this.p.project.findMany({
             where: {
                 ...(filter.user ? {
-                    user: filter.user
+                    userId: filter.user
                 } : undefined),
                 ...(filter.searchTerm ? {
                     name: {
@@ -71,7 +78,7 @@ class ProjectResolver {
                 } : undefined),
                 OR: [
                     {
-                        user: context.user?.uid
+                        userId: context.user?.uid
                     },
                     {
                         isPublic: true
@@ -89,7 +96,7 @@ class ProjectResolver {
         return await this.p.project.create({
             data: {
                 id: nanoid(),
-                user: context.user.uid,
+                userId: context.user.uid,
                 ...newProjectData
             }
         });
@@ -103,7 +110,7 @@ class ProjectResolver {
             }
         });
 
-        const canEdit = proj?.user === context.user.uid;
+        const canEdit = proj?.userId === context.user.uid;
 
         if(!proj || (!canEdit && !proj.isPublic)) {
             throw new NotFoundError(`Project with ID ${id} not found`);
@@ -137,17 +144,50 @@ class ProjectResolver {
     }
 }
 
+@Service()
+@Resolver(User)
+class UserResolver {
+    @Inject("PRISMA")
+    p: PrismaClient;
+
+    @Query(returns => Boolean)
+    async isUsernameAvailable(@Arg("name") name: string) {
+        return (await this.p.user.findUnique({
+            where: {
+                name
+            }
+        })) === null;
+    }
+
+    @Mutation(returns => User)
+    async setUsername(@Arg("name") name: string, @Ctx() context: Context) {
+        if(!context.user) throw new NotAuthorizedError("Must include ID token to set username");
+        return await this.p.user.upsert({
+            where: {
+                id: context.user.uid
+            },
+            create: {
+                id: context.user.uid,
+                name
+            },
+            update: {
+                name
+            }
+        });
+    }
+}
+
 // Dependency injection
 Container.set("PRISMA", prisma);
 
 export interface Context {
-    user: FirebaseAdmin.auth.DecodedIdToken | undefined
+    user: FirebaseAdmin.auth.DecodedIdToken | undefined,
+    prisma: PrismaClient
 }
 
 async function main() {
     const schema = await buildSchema({
-        resolvers: [ProjectResolver],
-        //authChecker,
+        resolvers: [ProjectResolver, UserResolver, ...relationResolvers],
         container: Container
     });
 
@@ -156,15 +196,19 @@ async function main() {
         playground: true,
         context: async ({ req }): Promise<Context> => {
             const token = req.headers.authorization;
-            if(token === undefined) return { user: undefined };
-            try {
-                return {
-                    user: await FirebaseAdmin.auth().verifyIdToken(token)
-                };
+            let user: FirebaseAdmin.auth.DecodedIdToken | undefined = undefined;
+            if(token !== undefined) {
+                try {
+                    user = await FirebaseAdmin.auth().verifyIdToken(token);
+                }
+                catch(error) {
+                    throw new Error("Invalid auth token");
+                }
             }
-            catch(error) {
-                throw new Error("Invalid auth token");
-            }
+            return {
+                user,
+                prisma
+            };
         }
     });
 

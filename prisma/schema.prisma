@@ -21,9 +21,16 @@ model Project {
   id String @id
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  user String
+  user User @relation(fields: [userId], references: [id])
+  userId String
   name String
   isPublic Boolean
   description String?
   projectJson String?
+}
+
+model User {
+  id String @id
+  name String @unique
+  projects Project[]
 }

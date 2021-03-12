@@ -35,5 +35,5 @@ export class FindFirstProjectArgs {
   @TypeGraphQL.Field(_type => [ProjectScalarFieldEnum], {
     nullable: true
   })
-  distinct?: Array<"id" | "createdAt" | "updatedAt" | "user" | "name" | "isPublic" | "description" | "projectJson"> | undefined;
+  distinct?: Array<"id" | "createdAt" | "updatedAt" | "userId" | "name" | "isPublic" | "description" | "projectJson"> | undefined;
 }

@@ -25,7 +25,7 @@ export class ProjectMaxAggregate {
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
-  user!: string | null;
+  userId!: string | null;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true

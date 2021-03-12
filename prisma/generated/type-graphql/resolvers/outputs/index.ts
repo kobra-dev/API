@@ -1,5 +1,9 @@
 export { AffectedRowsOutput } from "./AffectedRowsOutput";
 export { AggregateProject } from "./AggregateProject";
+export { AggregateUser } from "./AggregateUser";
 export { ProjectCountAggregate } from "./ProjectCountAggregate";
 export { ProjectMaxAggregate } from "./ProjectMaxAggregate";
 export { ProjectMinAggregate } from "./ProjectMinAggregate";
+export { UserCountAggregate } from "./UserCountAggregate";
+export { UserMaxAggregate } from "./UserMaxAggregate";
+export { UserMinAggregate } from "./UserMinAggregate";
