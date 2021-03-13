@@ -30,6 +30,6 @@ model Project {
 
 model User {
   id String @id
-  name String @unique @db.VarChar(50)
+  name String @unique @db.VarChar(20)
   projects Project[]
 }
