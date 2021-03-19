@@ -1,10 +1,7 @@
 import { ArgsType, Field } from "type-graphql";
 
 @ArgsType()
-export class ProjectsFilter {
-    @Field({ nullable: true })
-    user?: string;
-
+export class ProjectsUserFilter {
     @Field({ nullable: true })
     searchTerm?: string;
 
@@ -13,6 +10,12 @@ export class ProjectsFilter {
 
     @Field({ nullable: true })
     take?: number
+}
+
+@ArgsType()
+export class ProjectsFilter extends ProjectsUserFilter {
+    @Field({ nullable: true })
+    user?: string;
 }
 
 @ArgsType()

@@ -3,7 +3,7 @@
 // GraphQL
 import { ApolloServer } from "apollo-server";
 import "reflect-metadata";
-import { Arg, Args, buildSchema, Ctx, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Args, buildSchema, Ctx, FieldResolver, Mutation, Query, Resolver, Root } from "type-graphql";
 import { Container, Inject, Service } from "typedi";
 
 // Auth
@@ -12,14 +12,14 @@ import fs from "fs";
 
 // Prisma
 import { PrismaClient } from "@prisma/client";
-import { Project, User, relationResolvers } from "../prisma/generated/type-graphql";
+import { Project, User, ProjectRelationsResolver } from "../prisma/generated/type-graphql";
 
 // Misc
 import { nanoid } from "nanoid";
 import dotenv from "dotenv";
 
 // Business logic
-import { NewProjectInput, EditProjectInput, ProjectsFilter } from "./ProjectTypes";
+import { NewProjectInput, EditProjectInput, ProjectsFilter, ProjectsUserFilter } from "./ProjectTypes";
 import { NotFoundError, NotAuthorizedError } from "./errors";
 
 //#endregion
@@ -33,6 +33,38 @@ FirebaseAdmin.initializeApp({
         JSON.parse(fs.readFileSync("./firebase-key.json", "utf-8"))
     )
 });
+
+@Service()
+@Resolver(_of => User)
+class UserRelationsResolver {
+    @Inject("PRISMA")
+    p: PrismaClient;
+
+    @FieldResolver(returns => [Project], { nullable: false })
+    async projects(@Root() user: User, @Args() filter: ProjectsUserFilter, @Ctx() context: Context) {
+        return await this.p.project.findMany({
+            where: {
+                userId: user.id,
+                ...(filter.searchTerm ? {
+                    name: {
+                        contains: filter.searchTerm,
+                        mode: "insensitive"
+                    }
+                } : undefined),
+                OR: [
+                    {
+                        userId: context.user?.uid
+                    },
+                    {
+                        isPublic: true
+                    }
+                ]
+            },
+            skip: filter.skip,
+            take: filter.take
+        });
+    }
+}
 
 @Service()
 @Resolver(Project)
@@ -214,7 +246,7 @@ export interface Context {
 
 async function main() {
     const schema = await buildSchema({
-        resolvers: [ProjectResolver, UserResolver, ...relationResolvers],
+        resolvers: [ProjectResolver, UserResolver, ProjectRelationsResolver, UserRelationsResolver],
         container: Container
     });
 
