@@ -135,7 +135,7 @@ class ProjectResolver {
     async removeProject(@Arg("id") id: string, @Ctx() context: Context) {
         await this.verifyUserCanModifyProject(id, context);
 
-        await this.p.project.delete({
+        return await this.p.project.delete({
             where: {
                 id
             }
@@ -159,6 +159,18 @@ class UserResolver {
                 }
             }
         })) === null;
+    }
+
+    @Query(returns => String, { nullable: true })
+    async getUsername(@Arg("id") id: string) {
+        return (await this.p.user.findUnique({
+            where: {
+                id
+            },
+            select: {
+                name: true
+            }
+        }))?.name;
     }
 
     @Mutation(returns => User)
