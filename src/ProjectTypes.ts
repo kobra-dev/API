@@ -10,6 +10,9 @@ export class ProjectsUserFilter {
 
     @Field({ nullable: true })
     take?: number
+
+    @Field({ nullable: true })
+    sortByNewest?: boolean
 }
 
 @ArgsType()

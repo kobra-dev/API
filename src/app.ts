@@ -61,7 +61,10 @@ class UserRelationsResolver {
                 ]
             },
             skip: filter.skip,
-            take: filter.take
+            take: filter.take,
+            ...(filter.sortByNewest ? { orderBy: {
+                updatedAt: "desc"
+            }} : undefined)
         });
     }
 }
@@ -117,7 +120,10 @@ class ProjectResolver {
                 ]
             },
             skip: filter.skip,
-            take: filter.take
+            take: filter.take,
+            ...(filter.sortByNewest ? { orderBy: {
+                updatedAt: "desc"
+            }} : undefined)
         });
     }
 
