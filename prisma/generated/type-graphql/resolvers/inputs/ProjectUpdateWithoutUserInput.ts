@@ -5,6 +5,8 @@ import { DecimalJSScalar } from "../../scalars";
 import { BoolFieldUpdateOperationsInput } from "../inputs/BoolFieldUpdateOperationsInput";
 import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
 import { NullableStringFieldUpdateOperationsInput } from "../inputs/NullableStringFieldUpdateOperationsInput";
+import { ProjectUpdateManyWithoutParentInput } from "../inputs/ProjectUpdateManyWithoutParentInput";
+import { ProjectUpdateOneWithoutChildrenInput } from "../inputs/ProjectUpdateOneWithoutChildrenInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
 @TypeGraphQL.InputType({
@@ -45,4 +47,14 @@ export class ProjectUpdateWithoutUserInput {
     nullable: true
   })
   projectJson?: NullableStringFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => ProjectUpdateOneWithoutChildrenInput, {
+    nullable: true
+  })
+  parent?: ProjectUpdateOneWithoutChildrenInput | undefined;
+
+  @TypeGraphQL.Field(_type => ProjectUpdateManyWithoutParentInput, {
+    nullable: true
+  })
+  children?: ProjectUpdateManyWithoutParentInput | undefined;
 }

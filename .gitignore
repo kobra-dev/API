@@ -119,6 +119,8 @@ dist
 prisma/dev.db
 prisma/dev.db-journal
 dev.db
+prisma/migrations.bak
+prisma/dev.db.bak
 
 # Firebase
 firebase-key.json

@@ -6,14 +6,13 @@ import { BoolFieldUpdateOperationsInput } from "../inputs/BoolFieldUpdateOperati
 import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
 import { NullableStringFieldUpdateOperationsInput } from "../inputs/NullableStringFieldUpdateOperationsInput";
 import { ProjectUpdateManyWithoutParentInput } from "../inputs/ProjectUpdateManyWithoutParentInput";
-import { ProjectUpdateOneWithoutChildrenInput } from "../inputs/ProjectUpdateOneWithoutChildrenInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 import { UserUpdateOneRequiredWithoutProjectsInput } from "../inputs/UserUpdateOneRequiredWithoutProjectsInput";
 
 @TypeGraphQL.InputType({
   isAbstract: true
 })
-export class ProjectUpdateInput {
+export class ProjectUpdateWithoutParentInput {
   @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
     nullable: true
   })
@@ -53,11 +52,6 @@ export class ProjectUpdateInput {
     nullable: true
   })
   user?: UserUpdateOneRequiredWithoutProjectsInput | undefined;
-
-  @TypeGraphQL.Field(_type => ProjectUpdateOneWithoutChildrenInput, {
-    nullable: true
-  })
-  parent?: ProjectUpdateOneWithoutChildrenInput | undefined;
 
   @TypeGraphQL.Field(_type => ProjectUpdateManyWithoutParentInput, {
     nullable: true

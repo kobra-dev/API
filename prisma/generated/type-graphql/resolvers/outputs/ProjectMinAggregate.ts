@@ -46,4 +46,9 @@ export class ProjectMinAggregate {
     nullable: true
   })
   projectJson!: string | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  parentId!: string | null;
 }

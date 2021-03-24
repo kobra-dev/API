@@ -6,7 +6,7 @@ import { ProjectWhereUniqueInput } from "../../../inputs/ProjectWhereUniqueInput
 import { ProjectScalarFieldEnum } from "../../../../enums/ProjectScalarFieldEnum";
 
 @TypeGraphQL.ArgsType()
-export class FindFirstProjectArgs {
+export class ProjectChildrenArgs {
   @TypeGraphQL.Field(_type => ProjectWhereInput, {
     nullable: true
   })

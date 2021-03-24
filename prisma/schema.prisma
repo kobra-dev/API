@@ -26,6 +26,9 @@ model Project {
   isPublic Boolean
   description String?
   projectJson String?
+  parentId String?
+  parent Project? @relation("tree", fields: [parentId], references: [id])
+  children Project[] @relation("tree")
 }
 
 model User {
