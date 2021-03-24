@@ -48,6 +48,11 @@ export class ProjectCountAggregate {
   projectJson!: number | null;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: true
+  })
+  parentId!: number | null;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false
   })
   _all!: number;

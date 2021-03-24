@@ -34,6 +34,9 @@ export class NewProjectInput {
     
     @Field({ nullable: true })
     projectJson?: string;
+
+    @Field({ nullable: true })
+    parentId?: string;
 }
 
 @ArgsType()
@@ -49,4 +52,7 @@ export class EditProjectInput {
     
     @Field({ nullable: true })
     projectJson?: string;
+
+    @Field({ nullable: true })
+    parentId?: string
 }

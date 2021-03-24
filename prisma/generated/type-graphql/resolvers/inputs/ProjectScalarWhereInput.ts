@@ -65,4 +65,9 @@ export class ProjectScalarWhereInput {
     nullable: true
   })
   projectJson?: StringNullableFilter | undefined;
+
+  @TypeGraphQL.Field(_type => StringNullableFilter, {
+    nullable: true
+  })
+  parentId?: StringNullableFilter | undefined;
 }

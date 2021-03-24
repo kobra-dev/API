@@ -4,6 +4,8 @@ import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { BoolFilter } from "../inputs/BoolFilter";
 import { DateTimeFilter } from "../inputs/DateTimeFilter";
+import { ProjectListRelationFilter } from "../inputs/ProjectListRelationFilter";
+import { ProjectRelationFilter } from "../inputs/ProjectRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
 import { StringNullableFilter } from "../inputs/StringNullableFilter";
 import { UserRelationFilter } from "../inputs/UserRelationFilter";
@@ -71,4 +73,19 @@ export class ProjectWhereInput {
     nullable: true
   })
   projectJson?: StringNullableFilter | undefined;
+
+  @TypeGraphQL.Field(_type => StringNullableFilter, {
+    nullable: true
+  })
+  parentId?: StringNullableFilter | undefined;
+
+  @TypeGraphQL.Field(_type => ProjectRelationFilter, {
+    nullable: true
+  })
+  parent?: ProjectRelationFilter | undefined;
+
+  @TypeGraphQL.Field(_type => ProjectListRelationFilter, {
+    nullable: true
+  })
+  children?: ProjectListRelationFilter | undefined;
 }

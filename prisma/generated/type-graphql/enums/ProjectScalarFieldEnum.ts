@@ -8,7 +8,8 @@ export enum ProjectScalarFieldEnum {
   name = "name",
   isPublic = "isPublic",
   description = "description",
-  projectJson = "projectJson"
+  projectJson = "projectJson",
+  parentId = "parentId"
 }
 TypeGraphQL.registerEnumType(ProjectScalarFieldEnum, {
   name: "ProjectScalarFieldEnum",
