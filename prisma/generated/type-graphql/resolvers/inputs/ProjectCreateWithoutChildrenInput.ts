@@ -37,6 +37,11 @@ export class ProjectCreateWithoutChildrenInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
+  summary?: string | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
   description?: string | undefined;
 
   @TypeGraphQL.Field(_type => String, {

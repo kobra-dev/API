@@ -7,6 +7,7 @@ export enum ProjectScalarFieldEnum {
   userId = "userId",
   name = "name",
   isPublic = "isPublic",
+  summary = "summary",
   description = "description",
   projectJson = "projectJson",
   parentId = "parentId"

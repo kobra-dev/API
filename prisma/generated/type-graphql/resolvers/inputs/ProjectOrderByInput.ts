@@ -41,6 +41,11 @@ export class ProjectOrderByInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
+  summary?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
   description?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {

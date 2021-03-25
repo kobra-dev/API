@@ -28,6 +28,9 @@ export class NewProjectInput {
 
     @Field()
     isPublic: boolean;
+
+    @Field({ nullable: true })
+    summary?: string
     
     @Field({ nullable: true })
     description?: string;
@@ -43,6 +46,9 @@ export class NewProjectInput {
 export class EditProjectInput {
     @Field({ nullable: true })
     name?: string;
+
+    @Field({ nullable: true })
+    summary?: string
     
     @Field({ nullable: true })
     description?: string;
