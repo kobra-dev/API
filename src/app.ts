@@ -28,9 +28,20 @@ dotenv.config();
 
 const prisma = new PrismaClient();
 
+let firebaseConfig: string;
+
+try {
+    firebaseConfig = fs.readFileSync("./firebase-key.json", "utf-8");
+}
+catch(err) {
+    let c = process.env.FIREBASE_CONFIG;
+    if(!c) throw err;
+    firebaseConfig = c;
+}
+
 FirebaseAdmin.initializeApp({
     credential: FirebaseAdmin.credential.cert(
-        JSON.parse(fs.readFileSync("./firebase-key.json", "utf-8"))
+        JSON.parse(firebaseConfig)
     )
 });
 
