@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 import { nanoid } from "nanoid";
 import { Arg, Args, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import { Inject, Service } from "typedi";
@@ -6,6 +6,17 @@ import { Project } from "../../prisma/generated/type-graphql";
 import { Context } from "../app";
 import { NotAuthorizedError, NotFoundError } from "../errors";
 import { EditProjectInput, NewProjectInput, ProjectsFilter } from "../ProjectTypes";
+import { projectsUserFilterToFindManyArgs } from "./UserRelationsResolver";
+
+export const projectsFilterToFindManyArgs = (filter: ProjectsFilter, context: Context): Prisma.ProjectFindManyArgs => (
+    {
+        ...projectsUserFilterToFindManyArgs(filter, context, {
+            ...(filter.user ? {
+                userId: filter.user
+            } : undefined),
+        })
+    }
+);
 
 @Service()
 @Resolver(Project)
@@ -37,34 +48,7 @@ export default class ProjectResolver {
 
     @Query(returns => [Project])
     async projects(@Args() filter: ProjectsFilter, @Ctx() context: Context) {
-        return await this.p.project.findMany({
-            where: {
-                ...(filter.user ? {
-                    userId: filter.user
-                } : undefined),
-                ...(filter.searchTerm ? {
-                    name: {
-                        contains: filter.searchTerm,
-                        mode: "insensitive"
-                    }
-                } : undefined),
-                OR: [
-                    {
-                        userId: context.user?.uid
-                    },
-                    {
-                        isPublic: true
-                    }
-                ]
-            },
-            skip: filter.skip,
-            take: filter.take,
-            ...(filter.sortByNewest ? {
-                orderBy: {
-                    updatedAt: "desc"
-                }
-            } : undefined)
-        });
+        return await this.p.project.findMany(projectsFilterToFindManyArgs(filter, context));
     }
 
     @Mutation(returns => Project)
@@ -132,7 +116,7 @@ export default class ProjectResolver {
                 }
             })));
         }
-        
+
         return await this.p.project.delete({
             where: {
                 id

@@ -1,10 +1,11 @@
-import { PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 import { Args, Ctx, FieldResolver, Resolver, Root } from "type-graphql";
 import { Inject, Service } from "typedi";
 import { Project, User } from "../../prisma/generated/type-graphql";
 import { Context } from "../app";
 import { NotFoundError } from "../errors";
 import { ProjectsFilter, ProjectsUserFilter } from "../ProjectTypes";
+import { projectsFilterToFindManyArgs } from "./ProjectResolver";
 
 @Service()
 @Resolver(_of => Project)
@@ -12,20 +13,20 @@ export default class ProjectRelationsResolver {
     @Inject("PRISMA")
     p: PrismaClient;
 
-    async authFieldResolver<K extends keyof Project>(fieldName: K, project: Project, context: Context): Promise<Project[K]> {
+    async authFieldResolver<K extends keyof Prisma.ProjectInclude>(fieldName: K, project: Project, context: Context, fieldValue?: Prisma.ProjectInclude[K]): Promise<Project[K]> {
         const proj = await this.p.project.findUnique({
             where: {
                 id: project.id
             },
             include: {
-                [fieldName]: true
+                [fieldName]: fieldValue ?? true
             }
         });
-    
+
         if (!proj || (!proj.isPublic && proj.userId !== context.user?.uid))
             // If the user cannot access the project don't indicate that the project exists
             throw new NotFoundError(`Project not found`);
-        
+
         // @ts-ignore
         return proj[fieldName];
     }
@@ -42,7 +43,7 @@ export default class ProjectRelationsResolver {
 
     @FieldResolver(returns => [Project], { nullable: true })
     async children(@Root() project: Project, @Ctx() context: Context, @Args() args: ProjectsFilter) {
-        const children = await this.authFieldResolver("children", project, context);
+        const children = await this.authFieldResolver("children", project, context, projectsFilterToFindManyArgs(args, context));
         return children?.filter(child => child.isPublic || child.userId === context.user?.uid);
     }
 }
