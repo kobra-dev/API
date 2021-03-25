@@ -24,7 +24,7 @@ model Project {
   userId String
   name String @db.VarChar(50)
   isPublic Boolean
-  summary String?
+  summary String? @db.VarChar(250)
   description String?
   projectJson String?
   parentId String?
