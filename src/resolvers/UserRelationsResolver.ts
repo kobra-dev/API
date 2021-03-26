@@ -15,6 +15,9 @@ export const projectsUserFilterToFindManyArgs = (filter: ProjectsUserFilter, con
                     mode: "insensitive"
                 }
             } : undefined),
+            ...(filter.isPublic !== undefined ? {
+                isPublic: filter.isPublic
+            } : undefined),
             OR: [
                 {
                     userId: context.user?.uid

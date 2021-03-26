@@ -13,6 +13,9 @@ export class ProjectsUserFilter {
 
     @Field({ nullable: true })
     sortByNewest?: boolean
+
+    @Field({ nullable: true })
+    isPublic?: boolean
 }
 
 @ArgsType()
