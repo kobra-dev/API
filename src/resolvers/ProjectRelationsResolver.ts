@@ -38,7 +38,8 @@ export default class ProjectRelationsResolver {
 
     @FieldResolver(returns => Project, { nullable: true })
     async parent(@Root() project: Project, @Ctx() context: Context) {
-        return await this.authFieldResolver("parent", project, context);
+        const p = await this.authFieldResolver("parent", project, context);
+        return p?.isPublic || p?.userId === context.user?.uid ? p : undefined
     }
 
     @FieldResolver(returns => [Project], { nullable: true })
