@@ -18,6 +18,16 @@ export class UserCreateInput {
   })
   name!: string;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  bio?: string | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  url?: string | undefined;
+
   @TypeGraphQL.Field(_type => ProjectCreateNestedManyWithoutUserInput, {
     nullable: true
   })

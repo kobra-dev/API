@@ -35,5 +35,7 @@ model Project {
 model User {
   id String @id
   name String @unique @db.VarChar(20)
+  bio String? @db.VarChar(160)
+  url String? @db.VarChar(250)
   projects Project[]
 }

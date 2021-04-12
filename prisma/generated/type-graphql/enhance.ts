@@ -51,21 +51,21 @@ const relationResolversInfo = {
 };
 const modelsInfo = {
   Project: ["id", "createdAt", "updatedAt", "userId", "name", "isPublic", "summary", "description", "projectJson", "parentId"],
-  User: ["id", "name"]
+  User: ["id", "name", "bio", "url"]
 };
 const inputsInfo = {
   ProjectWhereInput: ["AND", "OR", "NOT", "id", "createdAt", "updatedAt", "user", "userId", "name", "isPublic", "summary", "description", "projectJson", "parentId", "parent", "children"],
   ProjectOrderByInput: ["id", "createdAt", "updatedAt", "userId", "name", "isPublic", "summary", "description", "projectJson", "parentId"],
   ProjectWhereUniqueInput: ["id"],
-  UserWhereInput: ["AND", "OR", "NOT", "id", "name", "projects"],
-  UserOrderByInput: ["id", "name"],
+  UserWhereInput: ["AND", "OR", "NOT", "id", "name", "bio", "url", "projects"],
+  UserOrderByInput: ["id", "name", "bio", "url"],
   UserWhereUniqueInput: ["id", "name"],
   ProjectCreateInput: ["id", "createdAt", "updatedAt", "name", "isPublic", "summary", "description", "projectJson", "user", "parent", "children"],
   ProjectUpdateInput: ["id", "createdAt", "updatedAt", "name", "isPublic", "summary", "description", "projectJson", "user", "parent", "children"],
   ProjectUpdateManyMutationInput: ["id", "createdAt", "updatedAt", "name", "isPublic", "summary", "description", "projectJson"],
-  UserCreateInput: ["id", "name", "projects"],
-  UserUpdateInput: ["id", "name", "projects"],
-  UserUpdateManyMutationInput: ["id", "name"],
+  UserCreateInput: ["id", "name", "bio", "url", "projects"],
+  UserUpdateInput: ["id", "name", "bio", "url", "projects"],
+  UserUpdateManyMutationInput: ["id", "name", "bio", "url"],
   StringFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "contains", "startsWith", "endsWith", "mode", "not"],
   DateTimeFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "not"],
   UserRelationFilter: ["is", "isNot"],
@@ -89,14 +89,14 @@ const inputsInfo = {
   NestedDateTimeFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "not"],
   NestedBoolFilter: ["equals", "not"],
   NestedStringNullableFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "contains", "startsWith", "endsWith", "not"],
-  UserCreateWithoutProjectsInput: ["id", "name"],
+  UserCreateWithoutProjectsInput: ["id", "name", "bio", "url"],
   UserCreateOrConnectWithoutProjectsInput: ["where", "create"],
   ProjectCreateWithoutChildrenInput: ["id", "createdAt", "updatedAt", "name", "isPublic", "summary", "description", "projectJson", "user", "parent"],
   ProjectCreateOrConnectWithoutChildrenInput: ["where", "create"],
   ProjectCreateWithoutParentInput: ["id", "createdAt", "updatedAt", "name", "isPublic", "summary", "description", "projectJson", "user", "children"],
   ProjectCreateOrConnectWithoutParentInput: ["where", "create"],
   UserUpsertWithoutProjectsInput: ["update", "create"],
-  UserUpdateWithoutProjectsInput: ["id", "name"],
+  UserUpdateWithoutProjectsInput: ["id", "name", "bio", "url"],
   ProjectUpsertWithoutChildrenInput: ["update", "create"],
   ProjectUpdateWithoutChildrenInput: ["id", "createdAt", "updatedAt", "name", "isPublic", "summary", "description", "projectJson", "user", "parent"],
   ProjectUpsertWithWhereUniqueWithoutParentInput: ["where", "update", "create"],
@@ -120,11 +120,11 @@ const outputsInfo = {
   ProjectCountAggregate: ["id", "createdAt", "updatedAt", "userId", "name", "isPublic", "summary", "description", "projectJson", "parentId", "_all"],
   ProjectMinAggregate: ["id", "createdAt", "updatedAt", "userId", "name", "isPublic", "summary", "description", "projectJson", "parentId"],
   ProjectMaxAggregate: ["id", "createdAt", "updatedAt", "userId", "name", "isPublic", "summary", "description", "projectJson", "parentId"],
-  UserCountAggregate: ["id", "name", "_all"],
-  UserMinAggregate: ["id", "name"],
-  UserMaxAggregate: ["id", "name"],
+  UserCountAggregate: ["id", "name", "bio", "url", "_all"],
+  UserMinAggregate: ["id", "name", "bio", "url"],
+  UserMaxAggregate: ["id", "name", "bio", "url"],
   Project: ["id", "createdAt", "updatedAt", "user", "userId", "name", "isPublic", "summary", "description", "projectJson", "parentId", "parent", "children"],
-  User: ["id", "name", "projects"]
+  User: ["id", "name", "bio", "url", "projects"]
 };
 const argsInfo = {
   FindUniqueProjectArgs: ["where"],

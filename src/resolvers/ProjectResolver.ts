@@ -18,6 +18,11 @@ export const projectsFilterToFindManyArgs = (filter: ProjectsFilter, context: Co
     }
 );
 
+export function removeNullKVPs<T>(item: T): Partial<T> {
+    // @ts-ignore
+    return Object.fromEntries(Object.entries(item).filter(([_, v]) => v));
+}
+
 @Service()
 @Resolver(Project)
 export default class ProjectResolver {
@@ -89,7 +94,7 @@ export default class ProjectResolver {
             where: {
                 id
             },
-            data: Object.fromEntries(Object.entries(editProjectData).filter(([_, v]) => (v != null)))
+            data: removeNullKVPs(editProjectData)
         });
     }
 

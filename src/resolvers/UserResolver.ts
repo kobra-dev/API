@@ -1,9 +1,19 @@
 import { PrismaClient } from "@prisma/client";
-import { Arg, Ctx, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Args, ArgsType, Ctx, Field, Maybe, Mutation, Query, Resolver } from "type-graphql";
 import { Inject, Service } from "typedi";
 import { User } from "../../prisma/generated/type-graphql";
 import { Context } from "../app";
 import { NotAuthorizedError } from "../errors";
+import { removeNullKVPs } from "./ProjectResolver";
+
+@ArgsType()
+class EditProfileInput {
+    @Field({ nullable: true })
+    bio?: string;
+
+    @Field({ nullable: true })
+    url?: string
+}
 
 @Service()
 @Resolver(User)
@@ -62,6 +72,17 @@ export default class UserResolver {
             update: {
                 name
             }
+        });
+    }
+
+    @Mutation(returns => User)
+    async editProfile(@Args() editProfileData: EditProfileInput, @Ctx() context: Context) {
+        if (!context.user) throw new NotAuthorizedError("Must include ID token to set bio");
+        return await this.p.user.update({
+            where: {
+                id: context.user.uid
+            },
+            data: removeNullKVPs(editProfileData)
         });
     }
 }

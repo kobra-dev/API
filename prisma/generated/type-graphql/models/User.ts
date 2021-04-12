@@ -18,5 +18,15 @@ export class User {
   })
   name!: string;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  bio?: string | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  url?: string | null;
+
   projects?: Project[];
 }

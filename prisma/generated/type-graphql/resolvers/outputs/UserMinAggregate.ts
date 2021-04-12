@@ -16,4 +16,14 @@ export class UserMinAggregate {
     nullable: true
   })
   name!: string | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  bio!: string | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  url!: string | null;
 }

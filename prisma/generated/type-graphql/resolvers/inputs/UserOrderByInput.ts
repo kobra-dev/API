@@ -17,4 +17,14 @@ export class UserOrderByInput {
     nullable: true
   })
   name?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  bio?: "asc" | "desc" | undefined;
+
+  @TypeGraphQL.Field(_type => SortOrder, {
+    nullable: true
+  })
+  url?: "asc" | "desc" | undefined;
 }

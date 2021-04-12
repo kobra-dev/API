@@ -4,6 +4,7 @@ import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { ProjectListRelationFilter } from "../inputs/ProjectListRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
+import { StringNullableFilter } from "../inputs/StringNullableFilter";
 
 @TypeGraphQL.InputType({
   isAbstract: true
@@ -33,6 +34,16 @@ export class UserWhereInput {
     nullable: true
   })
   name?: StringFilter | undefined;
+
+  @TypeGraphQL.Field(_type => StringNullableFilter, {
+    nullable: true
+  })
+  bio?: StringNullableFilter | undefined;
+
+  @TypeGraphQL.Field(_type => StringNullableFilter, {
+    nullable: true
+  })
+  url?: StringNullableFilter | undefined;
 
   @TypeGraphQL.Field(_type => ProjectListRelationFilter, {
     nullable: true

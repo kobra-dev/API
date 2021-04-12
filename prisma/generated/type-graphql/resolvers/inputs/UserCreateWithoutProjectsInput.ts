@@ -16,4 +16,14 @@ export class UserCreateWithoutProjectsInput {
     nullable: false
   })
   name!: string;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  bio?: string | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  url?: string | undefined;
 }
