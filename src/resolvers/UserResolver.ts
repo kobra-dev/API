@@ -15,11 +15,38 @@ class EditProfileInput {
     url?: string
 }
 
+@ArgsType()
+class UserInput {
+    @Field({ nullable: true })
+    id?: string;
+
+    @Field({ nullable: true })
+    name?: string;
+}
+
 @Service()
 @Resolver(User)
 export default class UserResolver {
     @Inject("PRISMA")
     p: PrismaClient;
+
+    @Query(returns => User, { nullable: true })
+    async user(@Args() userData: UserInput, @Ctx() context: Context) {
+        if(!userData.id && !userData.name) throw new Error("Must specify id or name to get user");
+
+        // TODO: security? actually not sure if it needs it
+        return await this.p.user.findFirst({
+            where: {
+                ...(userData.name && {
+                    name: {
+                        equals: userData.name,
+                        mode: "insensitive"
+                    }
+                }),
+                id: userData.id
+            }
+        })
+    }
 
     @Query(returns => Boolean)
     async isUsernameAvailable(@Arg("name") name: string) {
@@ -35,14 +62,7 @@ export default class UserResolver {
 
     @Query(returns => String, { nullable: true })
     async getUsername(@Arg("id") id: string) {
-        return (await this.p.user.findUnique({
-            where: {
-                id
-            },
-            select: {
-                name: true
-            }
-        }))?.name;
+        throw new Error("OBSOLETE: use user(id: $id) { name } instead");
     }
 
     @Mutation(returns => User)
