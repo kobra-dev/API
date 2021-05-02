@@ -1,4 +1,4 @@
-import { ArgsType, Field } from "type-graphql";
+import { ArgsType, Field } from "type-graphql"
 
 @ArgsType()
 export class ProjectsUserFilter {
@@ -34,10 +34,10 @@ export class NewProjectInput {
 
     @Field({ nullable: true })
     summary?: string
-    
+
     @Field({ nullable: true })
     description?: string;
-    
+
     @Field({ nullable: true })
     projectJson?: string;
 
@@ -52,13 +52,13 @@ export class EditProjectInput {
 
     @Field({ nullable: true })
     summary?: string
-    
+
     @Field({ nullable: true })
     description?: string;
 
     @Field({ nullable: true })
     isPublic?: boolean;
-    
+
     @Field({ nullable: true })
     projectJson?: string;
 

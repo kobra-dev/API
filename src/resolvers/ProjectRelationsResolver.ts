@@ -1,11 +1,11 @@
-import { Prisma, PrismaClient } from "@prisma/client";
-import { Args, Ctx, FieldResolver, Resolver, Root } from "type-graphql";
-import { Inject, Service } from "typedi";
-import { Project, User } from "../../prisma/generated/type-graphql";
-import { Context } from "../app";
-import { NotFoundError } from "../errors";
-import { ProjectsFilter, ProjectsUserFilter } from "../ProjectTypes";
-import { projectsFilterToFindManyArgs } from "./ProjectResolver";
+import { Prisma, PrismaClient } from "@prisma/client"
+import { Args, Ctx, FieldResolver, Resolver, Root } from "type-graphql"
+import { Inject, Service } from "typedi"
+import { Project, User } from "../../prisma/generated/type-graphql"
+import { Context } from "../app"
+import { NotFoundError } from "../errors"
+import { ProjectsFilter } from "../ProjectTypes"
+import { projectsFilterToFindManyArgs } from "./ProjectResolver"
 
 @Service()
 @Resolver(_of => Project)

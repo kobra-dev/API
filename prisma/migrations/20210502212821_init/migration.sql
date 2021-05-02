@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Project" ALTER COLUMN "summary" SET DATA TYPE VARCHAR(255);
+
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "url" SET DATA TYPE VARCHAR(255);

@@ -1,9 +1,9 @@
-import { Prisma, PrismaClient } from "@prisma/client";
-import { Args, Ctx, FieldResolver, Resolver, Root } from "type-graphql";
-import { Inject, Service } from "typedi";
-import { Project, User } from "../../prisma/generated/type-graphql";
-import { Context } from "../app";
-import { ProjectsUserFilter } from "../ProjectTypes";
+import { Prisma, PrismaClient } from "@prisma/client"
+import { Args, Ctx, FieldResolver, Resolver, Root } from "type-graphql"
+import { Inject, Service } from "typedi"
+import { Project, User } from "../../prisma/generated/type-graphql"
+import { Context } from "../app"
+import { ProjectsUserFilter } from "../ProjectTypes"
 
 export const projectsUserFilterToFindManyArgs = (filter: ProjectsUserFilter, context: Context, additionalWhere: Prisma.ProjectWhereInput): Prisma.ProjectFindManyArgs => (
     {

@@ -1,12 +1,12 @@
-import { Prisma, PrismaClient } from "@prisma/client";
-import { nanoid } from "nanoid";
-import { Arg, Args, Ctx, Mutation, Query, Resolver } from "type-graphql";
-import { Inject, Service } from "typedi";
-import { Project } from "../../prisma/generated/type-graphql";
-import { Context } from "../app";
-import { NotAuthorizedError, NotFoundError } from "../errors";
-import { EditProjectInput, NewProjectInput, ProjectsFilter } from "../ProjectTypes";
-import { projectsUserFilterToFindManyArgs } from "./UserRelationsResolver";
+import { Prisma, PrismaClient } from "@prisma/client"
+import { nanoid } from "nanoid"
+import { Arg, Args, Ctx, Mutation, Query, Resolver } from "type-graphql"
+import { Inject, Service } from "typedi"
+import { Project } from "../../prisma/generated/type-graphql"
+import { Context } from "../app"
+import { NotAuthorizedError, NotFoundError } from "../errors"
+import { EditProjectInput, NewProjectInput, ProjectsFilter } from "../ProjectTypes"
+import { projectsUserFilterToFindManyArgs } from "./UserRelationsResolver"
 
 export const projectsFilterToFindManyArgs = (filter: ProjectsFilter, context: Context): Prisma.ProjectFindManyArgs => (
     {

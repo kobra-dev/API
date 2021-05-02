@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:14-alpine
 
 WORKDIR /usr/src/app
 
@@ -6,7 +6,7 @@ COPY package.json ./
 COPY yarn.lock ./
 COPY prisma/schema.prisma ./
 
-RUN yarn install 
+RUN yarn install
 RUN npx prisma generate
 
 COPY . .

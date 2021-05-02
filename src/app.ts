@@ -1,26 +1,26 @@
 //#region Imports
 
 // GraphQL
-import { ApolloServer } from "apollo-server";
-import "reflect-metadata";
-import { buildSchema } from "type-graphql";
-import { Container } from "typedi";
-
-// Auth
-import FirebaseAdmin from "firebase-admin";
-import fs from "fs";
-
 // Prisma
-import { PrismaClient } from "@prisma/client";
-
+import { PrismaClient } from "@prisma/client"
+import { ApolloServer } from "apollo-server"
 // Misc
-import dotenv from "dotenv";
-
+import dotenv from "dotenv"
+// Auth
+import FirebaseAdmin from "firebase-admin"
+import fs from "fs"
+import "reflect-metadata"
+import { buildSchema } from "type-graphql"
+import { Container } from "typedi"
+import ProjectRelationsResolver from "./resolvers/ProjectRelationsResolver"
 // Resolvers
-import ProjectResolver from "./resolvers/ProjectResolver";
-import ProjectRelationsResolver from "./resolvers/ProjectRelationsResolver";
-import UserResolver from "./resolvers/UserResolver";
-import UserRelationsResolver from "./resolvers/UserRelationsResolver";
+import ProjectResolver from "./resolvers/ProjectResolver"
+import UserRelationsResolver from "./resolvers/UserRelationsResolver"
+import UserResolver from "./resolvers/UserResolver"
+
+
+
+
 
 //#endregion
 
