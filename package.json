@@ -35,6 +35,6 @@
     "prisma": "^2.19.0",
     "tslint": "^6.1.3",
     "typegraphql-prisma": "^0.12.0",
-    "typescript": "^4.2.3"
+    "typescript": "^4.2.4"
   }
 }
