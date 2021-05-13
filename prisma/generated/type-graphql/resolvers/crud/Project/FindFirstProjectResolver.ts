@@ -1,14 +1,22 @@
 import * as TypeGraphQL from "type-graphql";
+import graphqlFields from "graphql-fields";
+import { GraphQLResolveInfo } from "graphql";
 import { FindFirstProjectArgs } from "./args/FindFirstProjectArgs";
 import { Project } from "../../../models/Project";
-import { transformFields, getPrismaFromContext } from "../../../helpers";
+import { transformFields, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @TypeGraphQL.Resolver(_of => Project)
 export class FindFirstProjectResolver {
   @TypeGraphQL.Query(_returns => Project, {
     nullable: true
   })
-  async findFirstProject(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Args() args: FindFirstProjectArgs): Promise<Project | null> {
-    return getPrismaFromContext(ctx).project.findFirst(args);
+  async findFirstProject(@TypeGraphQL.Ctx() ctx: any, @TypeGraphQL.Info() info: GraphQLResolveInfo, @TypeGraphQL.Args() args: FindFirstProjectArgs): Promise<Project | null> {
+    const { _count } = transformFields(
+      graphqlFields(info as any)
+    );
+    return getPrismaFromContext(ctx).project.findFirst({
+      ...args,
+      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
+    });
   }
 }

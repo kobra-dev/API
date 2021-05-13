@@ -2,6 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { ProjectCreateManyParentInputEnvelope } from "../inputs/ProjectCreateManyParentInputEnvelope";
 import { ProjectCreateOrConnectWithoutParentInput } from "../inputs/ProjectCreateOrConnectWithoutParentInput";
 import { ProjectCreateWithoutParentInput } from "../inputs/ProjectCreateWithoutParentInput";
 import { ProjectScalarWhereInput } from "../inputs/ProjectScalarWhereInput";
@@ -28,6 +29,11 @@ export class ProjectUpdateManyWithoutParentInput {
     nullable: true
   })
   upsert?: ProjectUpsertWithWhereUniqueWithoutParentInput[] | undefined;
+
+  @TypeGraphQL.Field(_type => ProjectCreateManyParentInputEnvelope, {
+    nullable: true
+  })
+  createMany?: ProjectCreateManyParentInputEnvelope | undefined;
 
   @TypeGraphQL.Field(_type => [ProjectWhereUniqueInput], {
     nullable: true
