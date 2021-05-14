@@ -2841,7 +2841,7 @@ prettysize@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/prettysize/-/prettysize-2.0.0.tgz"
 
-prisma@~2.22.0:
+prisma@2.22.1:
   version "2.22.1"
   resolved "https://registry.yarnpkg.com/prisma/-/prisma-2.22.1.tgz#884687a90c7b797b34c6110ea413049078c8da6e"
   integrity sha512-hwvCM3zyxgSda/+/p+GW7nz93jRebtMU01wAG7YVVnl0OKU+dpw1wPvPFmQRldkZHk8fTCleYmjc24WaSdVPZQ==
@@ -3568,7 +3568,7 @@ typedi@^0.10.0:
   resolved "https://registry.yarnpkg.com/typedi/-/typedi-0.10.0.tgz#e8f9a5ee100b84addbdfb57fe90d8d9ed2a21dea"
   integrity sha512-v3UJF8xm68BBj6AF4oQML3ikrfK2c9EmZUyLOfShpJuItAqVBHWP/KtpGinkSsIiP6EZyyb6Z3NXyW9dgS9X1w==
 
-typegraphql-prisma@^0.14.2:
+typegraphql-prisma@0.14.2:
   version "0.14.2"
   resolved "https://registry.yarnpkg.com/typegraphql-prisma/-/typegraphql-prisma-0.14.2.tgz#72dfcd96974a30205c518595d3e7a7b8326a5a5b"
   integrity sha512-juYzGp/hwcwA0AQDI9S+5jJ/SiAauctKJWRuMs2jp5j9Nt1Z0WmV5qPu6dqv9E+XE8RooxoGWkepM+WdZzR3gA==
