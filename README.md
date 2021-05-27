@@ -1,6 +1,6 @@
 # Kobra API
 
-This repository has two parts, our main GraphQL API and an unused dataset API.
+This repository has two parts, our main GraphQL API.
 
 ## Environment variables
 

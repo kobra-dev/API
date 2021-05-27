@@ -20,7 +20,7 @@ export const projectsFilterToFindManyArgs = (filter: ProjectsFilter, context: Co
 
 export function removeNullKVPs<T>(item: T): Partial<T> {
     // @ts-ignore
-    return Object.fromEntries(Object.entries(item).filter(([_, v]) => v));
+    return Object.fromEntries(Object.entries(item).filter(([_, v]) => v !== undefined && v !== null));
 }
 
 @Service()
