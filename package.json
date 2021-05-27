@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/kobra-dev/API",
-  "author": "Pranav Teegavarapu | Benjamin Smith | Makuza Mugabo Verite <pranavnt@outlook.com>",
+  "author": "Pranav Teegavarapu | Benjamin Smith | Makuza Mugabo Verite <support@kobra.dev>",
   "license": "MIT",
   "scripts": {
     "start": "nodemon -w src --ext ts --exec ts-node src/app.ts",
