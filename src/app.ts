@@ -19,9 +19,6 @@ import UserRelationsResolver from "./resolvers/UserRelationsResolver"
 import UserResolver from "./resolvers/UserResolver"
 
 
-
-
-
 //#endregion
 
 dotenv.config();

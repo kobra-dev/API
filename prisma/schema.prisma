@@ -37,4 +37,5 @@ model User {
   bio      String?   @db.VarChar(160)
   url      String?   @db.VarChar(255)
   projects Project[]
+  datasets String[]
 }

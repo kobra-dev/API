@@ -5,6 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { ProjectListRelationFilter } from "../inputs/ProjectListRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
 import { StringNullableFilter } from "../inputs/StringNullableFilter";
+import { StringNullableListFilter } from "../inputs/StringNullableListFilter";
 
 @TypeGraphQL.InputType({
   isAbstract: true
@@ -49,4 +50,9 @@ export class UserWhereInput {
     nullable: true
   })
   projects?: ProjectListRelationFilter | undefined;
+
+  @TypeGraphQL.Field(_type => StringNullableListFilter, {
+    nullable: true
+  })
+  datasets?: StringNullableListFilter | undefined;
 }

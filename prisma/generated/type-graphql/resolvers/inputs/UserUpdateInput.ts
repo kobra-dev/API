@@ -5,6 +5,7 @@ import { DecimalJSScalar } from "../../scalars";
 import { NullableStringFieldUpdateOperationsInput } from "../inputs/NullableStringFieldUpdateOperationsInput";
 import { ProjectUpdateManyWithoutUserInput } from "../inputs/ProjectUpdateManyWithoutUserInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
+import { UserUpdatedatasetsInput } from "../inputs/UserUpdatedatasetsInput";
 
 @TypeGraphQL.InputType({
   isAbstract: true
@@ -29,6 +30,11 @@ export class UserUpdateInput {
     nullable: true
   })
   url?: NullableStringFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => UserUpdatedatasetsInput, {
+    nullable: true
+  })
+  datasets?: UserUpdatedatasetsInput | undefined;
 
   @TypeGraphQL.Field(_type => ProjectUpdateManyWithoutUserInput, {
     nullable: true

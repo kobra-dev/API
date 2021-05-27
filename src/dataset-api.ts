@@ -13,7 +13,7 @@ var upload = multer();
 
 // Use this key for testing: 5ccf40d8-1123-4d17-8ad7-cff6e94be703
 // @ts-ignore
-app.post("/datasetUpload", upload.single("dataset"), function (req, res) {
+app.post("/dataset", upload.single("dataset"), function (req, res) {
   //get file and upload to digitalocean spaces
   const encodedDataset = req.file.buffer.toString("base64");
 

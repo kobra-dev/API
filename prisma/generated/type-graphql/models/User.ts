@@ -29,4 +29,9 @@ export class User {
   url?: string | null;
 
   projects?: Project[];
+
+  @TypeGraphQL.Field(_type => [String], {
+    nullable: false
+  })
+  datasets!: string[];
 }

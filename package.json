@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/kobra-dev/API",
-  "author": "Pranav Teegavarapu | Benjamin Smith <pranavnt@outlook.com>",
+  "author": "Pranav Teegavarapu | Benjamin Smith | Makuza Mugabo Verite <pranavnt@outlook.com>",
   "license": "MIT",
   "scripts": {
     "start": "nodemon -w src --ext ts --exec ts-node src/app.ts",
     "prod": "ts-node src/app.ts"
   },
   "dependencies": {
-    "@prisma/client": "^2.19.0",
+    "@prisma/client": "^2.23.0",
     "@types/graphql-fields": "^1.3.3",
     "@types/node": "^14.14.35",
     "apollo-server": "^2.18.2",
@@ -32,9 +32,9 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.5",
-    "prisma": "^2.19.0",
+    "prisma": "^2.23.0",
     "tslint": "^6.1.3",
-    "typegraphql-prisma": "^0.12.0",
+    "typegraphql-prisma": "^0.14.3",
     "typescript": "^4.2.3"
   }
 }
