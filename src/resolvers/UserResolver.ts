@@ -153,7 +153,7 @@ export default class UserResolver {
 
     const user = await this.p.user.findFirst({
       where: {
-        id: context.user.id,
+        id: context.user.uid,
         datasets: {
           has: dataSet.dataSetKey,
         },
@@ -166,10 +166,10 @@ export default class UserResolver {
 
     return await this.p.user.update({
       where: {
-        id: context.user.id,
+        id: context.user.uid,
       },
       data: {
-        datasets,
+        datasets: datasets,
       },
     });
   }
