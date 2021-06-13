@@ -135,14 +135,20 @@ export default class UserResolver {
   async addDataSet(@Args() dataSet: DataSetInput, @Ctx() context: Context) {
     if (!context.user) throw new NotAuthorizedError("Not authorized");
 
+    const userDataSets = await this.p.user.findFirst({
+      where: { id: context.user.uid },
+    });
+
+    if (userDataSets) {
+      userDataSets.datasets.unshift(dataSet.dataSetKey as string);
+    }
+
     return await this.p.user.update({
       where: {
         id: context.user.uid,
       },
       data: {
-        datasets: {
-          push: dataSet.dataSetKey,
-        },
+        datasets: userDataSets?.datasets,
       },
     });
   }
@@ -170,6 +176,19 @@ export default class UserResolver {
       },
       data: {
         datasets: datasets,
+      },
+    });
+  }
+
+  @Query((returns) => User)
+  async isDataSetFound(@Args() dataSet: DataSetInput, @Ctx() context: Context) {
+    if (!context.user) throw new NotAuthorizedError("Not authorized");
+    return await this.p.user.findFirst({
+      where: {
+        id: context.user.uid,
+        datasets: {
+          has: dataSet.dataSetKey,
+        },
       },
     });
   }
