@@ -67,15 +67,15 @@ export class NestedStringWithAggregatesFilter {
   @TypeGraphQL.Field(_type => NestedIntFilter, {
     nullable: true
   })
-  _count?: NestedIntFilter | undefined;
+  count?: NestedIntFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedStringFilter, {
     nullable: true
   })
-  _min?: NestedStringFilter | undefined;
+  min?: NestedStringFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedStringFilter, {
     nullable: true
   })
-  _max?: NestedStringFilter | undefined;
+  max?: NestedStringFilter | undefined;
 }

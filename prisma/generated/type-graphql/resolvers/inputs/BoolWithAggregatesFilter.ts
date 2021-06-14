@@ -23,15 +23,15 @@ export class BoolWithAggregatesFilter {
   @TypeGraphQL.Field(_type => NestedIntFilter, {
     nullable: true
   })
-  _count?: NestedIntFilter | undefined;
+  count?: NestedIntFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedBoolFilter, {
     nullable: true
   })
-  _min?: NestedBoolFilter | undefined;
+  min?: NestedBoolFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedBoolFilter, {
     nullable: true
   })
-  _max?: NestedBoolFilter | undefined;
+  max?: NestedBoolFilter | undefined;
 }

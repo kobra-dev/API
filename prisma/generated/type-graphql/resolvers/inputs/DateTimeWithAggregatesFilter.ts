@@ -53,15 +53,15 @@ export class DateTimeWithAggregatesFilter {
   @TypeGraphQL.Field(_type => NestedIntFilter, {
     nullable: true
   })
-  _count?: NestedIntFilter | undefined;
+  count?: NestedIntFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedDateTimeFilter, {
     nullable: true
   })
-  _min?: NestedDateTimeFilter | undefined;
+  min?: NestedDateTimeFilter | undefined;
 
   @TypeGraphQL.Field(_type => NestedDateTimeFilter, {
     nullable: true
   })
-  _max?: NestedDateTimeFilter | undefined;
+  max?: NestedDateTimeFilter | undefined;
 }
