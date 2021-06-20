@@ -30,6 +30,11 @@ export class UserCountAggregate {
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
     nullable: false
   })
+  emailUpdates!: number;
+
+  @TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+    nullable: false
+  })
   datasets!: number;
 
   @TypeGraphQL.Field(_type => TypeGraphQL.Int, {

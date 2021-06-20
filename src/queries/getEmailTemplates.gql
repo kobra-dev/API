@@ -1,0 +1,11 @@
+query GetEmailTemplates($id: String!) {
+  emailTemplateCollection(where: { id: $id }, limit: 1) {
+    items {
+      id
+      from
+      replyTo
+      subject
+      body
+    }
+  }
+}

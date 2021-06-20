@@ -26,4 +26,9 @@ export class UserMaxAggregate {
     nullable: true
   })
   url!: string | null;
+
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true
+  })
+  emailUpdates!: boolean | null;
 }

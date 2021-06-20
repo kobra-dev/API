@@ -29,6 +29,11 @@ export class UserCreateInput {
   })
   url?: string | undefined;
 
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true
+  })
+  emailUpdates?: boolean | undefined;
+
   @TypeGraphQL.Field(_type => UserCreatedatasetsInput, {
     nullable: true
   })

@@ -2,6 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { BoolNullableWithAggregatesFilter } from "../inputs/BoolNullableWithAggregatesFilter";
 import { StringNullableListFilter } from "../inputs/StringNullableListFilter";
 import { StringNullableWithAggregatesFilter } from "../inputs/StringNullableWithAggregatesFilter";
 import { StringWithAggregatesFilter } from "../inputs/StringWithAggregatesFilter";
@@ -44,6 +45,11 @@ export class UserScalarWhereWithAggregatesInput {
     nullable: true
   })
   url?: StringNullableWithAggregatesFilter | undefined;
+
+  @TypeGraphQL.Field(_type => BoolNullableWithAggregatesFilter, {
+    nullable: true
+  })
+  emailUpdates?: BoolNullableWithAggregatesFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringNullableListFilter, {
     nullable: true

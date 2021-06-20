@@ -30,23 +30,28 @@ export class UserGroupBy {
   })
   url!: string | null;
 
-  @TypeGraphQL.Field(_type => [String], {
-    nullable: false
+  @TypeGraphQL.Field(_type => Boolean, {
+    nullable: true
   })
-  datasets!: string[];
+  emailUpdates!: boolean | null;
+
+  @TypeGraphQL.Field(_type => [String], {
+    nullable: true
+  })
+  datasets!: string[] | null;
 
   @TypeGraphQL.Field(_type => UserCountAggregate, {
     nullable: true
   })
-  count!: UserCountAggregate | null;
+  _count!: UserCountAggregate | null;
 
   @TypeGraphQL.Field(_type => UserMinAggregate, {
     nullable: true
   })
-  min!: UserMinAggregate | null;
+  _min!: UserMinAggregate | null;
 
   @TypeGraphQL.Field(_type => UserMaxAggregate, {
     nullable: true
   })
-  max!: UserMaxAggregate | null;
+  _max!: UserMaxAggregate | null;
 }

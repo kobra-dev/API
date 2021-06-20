@@ -63,15 +63,15 @@ export class ProjectGroupBy {
   @TypeGraphQL.Field(_type => ProjectCountAggregate, {
     nullable: true
   })
-  count!: ProjectCountAggregate | null;
+  _count!: ProjectCountAggregate | null;
 
   @TypeGraphQL.Field(_type => ProjectMinAggregate, {
     nullable: true
   })
-  min!: ProjectMinAggregate | null;
+  _min!: ProjectMinAggregate | null;
 
   @TypeGraphQL.Field(_type => ProjectMaxAggregate, {
     nullable: true
   })
-  max!: ProjectMaxAggregate | null;
+  _max!: ProjectMaxAggregate | null;
 }

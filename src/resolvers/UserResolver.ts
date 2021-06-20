@@ -14,6 +14,7 @@ import { User } from "../../prisma/generated/type-graphql";
 import { Context } from "../app";
 import { NotAuthorizedError, NotFoundError } from "../errors";
 import { removeNullKVPs } from "./ProjectResolver";
+import sendEmailTemplate from "../emailer";
 
 @ArgsType()
 class EditProfileInput {
@@ -85,7 +86,7 @@ export default class UserResolver {
   }
 
   @Mutation((returns) => User)
-  async setUsername(@Arg("name") name: string, @Ctx() context: Context) {
+  async setUsername(@Arg("name") name: string, @Ctx() context: Context, @Arg("sendUserTestingEmail", { nullable: true }) shouldSendUserTestingEmail?: boolean, @Arg("emailUpdates", { nullable: true }) emailUpdates?: boolean) {
     if (!context.user)
       throw new NotAuthorizedError("Must include ID token to set username");
     if (name.trim().length < 0)
@@ -102,6 +103,19 @@ export default class UserResolver {
       throw new NotAuthorizedError("Username is taken");
     }
 
+    const currentUser = await this.p.user.findFirst({
+      where: {
+        id: context.user.uid
+      }
+    });
+
+    if (!currentUser && context.user.email) {
+      if(shouldSendUserTestingEmail)
+        sendEmailTemplate("userTesting", context.user.email, name);
+      else if(emailUpdates)
+        sendEmailTemplate("welcome", context.user.email, name);
+    }
+
     return await this.p.user.upsert({
       where: {
         id: context.user.uid,
@@ -109,9 +123,11 @@ export default class UserResolver {
       create: {
         id: context.user.uid,
         name,
+        emailUpdates
       },
       update: {
         name,
+        emailUpdates
       },
     });
   }

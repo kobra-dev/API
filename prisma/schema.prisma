@@ -36,6 +36,7 @@ model User {
   name     String    @unique @db.VarChar(20)
   bio      String?   @db.VarChar(160)
   url      String?   @db.VarChar(255)
+  emailUpdates      Boolean?
   projects Project[]
   datasets String[]
 }
