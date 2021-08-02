@@ -26,6 +26,7 @@ model Project {
   summary     String?   @db.VarChar(255)
   description String?
   projectJson String?
+  modelsDb String?
   parentId    String?
   parent      Project?  @relation("tree", fields: [parentId], references: [id])
   children    Project[] @relation("tree")

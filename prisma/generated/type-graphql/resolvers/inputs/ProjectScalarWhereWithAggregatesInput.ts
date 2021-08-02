@@ -74,5 +74,10 @@ export class ProjectScalarWhereWithAggregatesInput {
   @TypeGraphQL.Field(_type => StringNullableWithAggregatesFilter, {
     nullable: true
   })
+  modelsDb?: StringNullableWithAggregatesFilter | undefined;
+
+  @TypeGraphQL.Field(_type => StringNullableWithAggregatesFilter, {
+    nullable: true
+  })
   parentId?: StringNullableWithAggregatesFilter | undefined;
 }

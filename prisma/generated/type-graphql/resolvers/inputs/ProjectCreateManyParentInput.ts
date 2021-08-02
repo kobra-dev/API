@@ -51,4 +51,9 @@ export class ProjectCreateManyParentInput {
     nullable: true
   })
   projectJson?: string | undefined;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  modelsDb?: string | undefined;
 }

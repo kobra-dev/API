@@ -53,6 +53,11 @@ export class ProjectUpdateWithoutParentInput {
   })
   projectJson?: NullableStringFieldUpdateOperationsInput | undefined;
 
+  @TypeGraphQL.Field(_type => NullableStringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  modelsDb?: NullableStringFieldUpdateOperationsInput | undefined;
+
   @TypeGraphQL.Field(_type => UserUpdateOneRequiredWithoutProjectsInput, {
     nullable: true
   })

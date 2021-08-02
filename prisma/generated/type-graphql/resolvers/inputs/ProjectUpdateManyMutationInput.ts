@@ -50,4 +50,9 @@ export class ProjectUpdateManyMutationInput {
     nullable: true
   })
   projectJson?: NullableStringFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => NullableStringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  modelsDb?: NullableStringFieldUpdateOperationsInput | undefined;
 }
