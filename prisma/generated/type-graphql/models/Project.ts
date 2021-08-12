@@ -58,6 +58,11 @@ export class Project {
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
+  modelsDb?: string | null;
+
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
   parentId?: string | null;
 
   parent?: Project | null;

@@ -50,6 +50,11 @@ export class ProjectCreateInput {
   })
   projectJson?: string | undefined;
 
+  @TypeGraphQL.Field(_type => String, {
+    nullable: true
+  })
+  modelsDb?: string | undefined;
+
   @TypeGraphQL.Field(_type => UserCreateNestedOneWithoutProjectsInput, {
     nullable: false
   })
