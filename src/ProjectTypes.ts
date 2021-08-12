@@ -42,6 +42,9 @@ export class NewProjectInput {
     projectJson?: string;
 
     @Field({ nullable: true })
+    modelsDb?: string;
+
+    @Field({ nullable: true })
     parentId?: string;
 }
 
@@ -61,6 +64,9 @@ export class EditProjectInput {
 
     @Field({ nullable: true })
     projectJson?: string;
+
+    @Field({ nullable: true })
+    modelsDb?: string;
 
     @Field({ nullable: true })
     parentId?: string
