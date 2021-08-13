@@ -26,10 +26,18 @@ model Project {
   summary     String?   @db.VarChar(255)
   description String?
   projectJson String?
-  modelsDb String?
+  models      MLModel[]
   parentId    String?
   parent      Project?  @relation("tree", fields: [parentId], references: [id])
   children    Project[] @relation("tree")
+}
+
+model MLModel {
+  id              String  @id
+  modelJSON       String 
+  modelParams     String?
+  project         Project @relation(fields: [projectID], references: [id])
+  projectID       String
 }
 
 model User {
