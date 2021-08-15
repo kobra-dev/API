@@ -10,7 +10,6 @@ export enum ProjectScalarFieldEnum {
   summary = "summary",
   description = "description",
   projectJson = "projectJson",
-  modelsDb = "modelsDb",
   parentId = "parentId"
 }
 TypeGraphQL.registerEnumType(ProjectScalarFieldEnum, {

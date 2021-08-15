@@ -74,10 +74,5 @@ export class ProjectScalarWhereInput {
   @TypeGraphQL.Field(_type => StringNullableFilter, {
     nullable: true
   })
-  modelsDb?: StringNullableFilter | undefined;
-
-  @TypeGraphQL.Field(_type => StringNullableFilter, {
-    nullable: true
-  })
   parentId?: StringNullableFilter | undefined;
 }

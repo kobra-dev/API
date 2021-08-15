@@ -55,10 +55,5 @@ export class ProjectCreateManyInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
-  modelsDb?: string | undefined;
-
-  @TypeGraphQL.Field(_type => String, {
-    nullable: true
-  })
   parentId?: string | undefined;
 }

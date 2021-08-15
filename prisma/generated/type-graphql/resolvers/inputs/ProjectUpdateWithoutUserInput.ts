@@ -4,6 +4,7 @@ import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { BoolFieldUpdateOperationsInput } from "../inputs/BoolFieldUpdateOperationsInput";
 import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
+import { MLModelUpdateManyWithoutProjectInput } from "../inputs/MLModelUpdateManyWithoutProjectInput";
 import { NullableStringFieldUpdateOperationsInput } from "../inputs/NullableStringFieldUpdateOperationsInput";
 import { ProjectUpdateManyWithoutParentInput } from "../inputs/ProjectUpdateManyWithoutParentInput";
 import { ProjectUpdateOneWithoutChildrenInput } from "../inputs/ProjectUpdateOneWithoutChildrenInput";
@@ -53,10 +54,10 @@ export class ProjectUpdateWithoutUserInput {
   })
   projectJson?: NullableStringFieldUpdateOperationsInput | undefined;
 
-  @TypeGraphQL.Field(_type => NullableStringFieldUpdateOperationsInput, {
+  @TypeGraphQL.Field(_type => MLModelUpdateManyWithoutProjectInput, {
     nullable: true
   })
-  modelsDb?: NullableStringFieldUpdateOperationsInput | undefined;
+  models?: MLModelUpdateManyWithoutProjectInput | undefined;
 
   @TypeGraphQL.Field(_type => ProjectUpdateOneWithoutChildrenInput, {
     nullable: true

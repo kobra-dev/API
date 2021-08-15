@@ -1,6 +1,11 @@
 export { AffectedRowsOutput } from "./AffectedRowsOutput";
+export { AggregateMLModel } from "./AggregateMLModel";
 export { AggregateProject } from "./AggregateProject";
 export { AggregateUser } from "./AggregateUser";
+export { MLModelCountAggregate } from "./MLModelCountAggregate";
+export { MLModelGroupBy } from "./MLModelGroupBy";
+export { MLModelMaxAggregate } from "./MLModelMaxAggregate";
+export { MLModelMinAggregate } from "./MLModelMinAggregate";
 export { ProjectCountAggregate } from "./ProjectCountAggregate";
 export { ProjectGroupBy } from "./ProjectGroupBy";
 export { ProjectMaxAggregate } from "./ProjectMaxAggregate";

@@ -1,3 +1,15 @@
+export { FindUniqueMLModelResolver } from "./MLModel/FindUniqueMLModelResolver";
+export { FindFirstMLModelResolver } from "./MLModel/FindFirstMLModelResolver";
+export { FindManyMLModelResolver } from "./MLModel/FindManyMLModelResolver";
+export { CreateMLModelResolver } from "./MLModel/CreateMLModelResolver";
+export { CreateManyMLModelResolver } from "./MLModel/CreateManyMLModelResolver";
+export { DeleteMLModelResolver } from "./MLModel/DeleteMLModelResolver";
+export { UpdateMLModelResolver } from "./MLModel/UpdateMLModelResolver";
+export { DeleteManyMLModelResolver } from "./MLModel/DeleteManyMLModelResolver";
+export { UpdateManyMLModelResolver } from "./MLModel/UpdateManyMLModelResolver";
+export { UpsertMLModelResolver } from "./MLModel/UpsertMLModelResolver";
+export { AggregateMLModelResolver } from "./MLModel/AggregateMLModelResolver";
+export { GroupByMLModelResolver } from "./MLModel/GroupByMLModelResolver";
 export { FindUniqueProjectResolver } from "./Project/FindUniqueProjectResolver";
 export { FindFirstProjectResolver } from "./Project/FindFirstProjectResolver";
 export { FindManyProjectResolver } from "./Project/FindManyProjectResolver";

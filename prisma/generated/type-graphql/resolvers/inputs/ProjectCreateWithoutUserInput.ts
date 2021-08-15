@@ -2,6 +2,7 @@ import * as TypeGraphQL from "type-graphql";
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { MLModelCreateNestedManyWithoutProjectInput } from "../inputs/MLModelCreateNestedManyWithoutProjectInput";
 import { ProjectCreateNestedManyWithoutParentInput } from "../inputs/ProjectCreateNestedManyWithoutParentInput";
 import { ProjectCreateNestedOneWithoutChildrenInput } from "../inputs/ProjectCreateNestedOneWithoutChildrenInput";
 
@@ -49,10 +50,10 @@ export class ProjectCreateWithoutUserInput {
   })
   projectJson?: string | undefined;
 
-  @TypeGraphQL.Field(_type => String, {
+  @TypeGraphQL.Field(_type => MLModelCreateNestedManyWithoutProjectInput, {
     nullable: true
   })
-  modelsDb?: string | undefined;
+  models?: MLModelCreateNestedManyWithoutProjectInput | undefined;
 
   @TypeGraphQL.Field(_type => ProjectCreateNestedOneWithoutChildrenInput, {
     nullable: true
