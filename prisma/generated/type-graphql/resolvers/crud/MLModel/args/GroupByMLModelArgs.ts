@@ -20,7 +20,7 @@ export class GroupByMLModelArgs {
   @TypeGraphQL.Field(_type => [MLModelScalarFieldEnum], {
     nullable: false
   })
-  by!: Array<"id" | "modelJSON" | "modelParams" | "projectID">;
+  by!: Array<"id" | "modelJson" | "modelParams" | "projectId">;
 
   @TypeGraphQL.Field(_type => MLModelScalarWhereWithAggregatesInput, {
     nullable: true

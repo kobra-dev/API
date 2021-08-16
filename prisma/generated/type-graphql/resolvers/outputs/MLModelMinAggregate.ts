@@ -15,7 +15,7 @@ export class MLModelMinAggregate {
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
-  modelJSON!: string | null;
+  modelJson!: string | null;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true
@@ -25,5 +25,5 @@ export class MLModelMinAggregate {
   @TypeGraphQL.Field(_type => String, {
     nullable: true
   })
-  projectID!: string | null;
+  projectId!: string | null;
 }

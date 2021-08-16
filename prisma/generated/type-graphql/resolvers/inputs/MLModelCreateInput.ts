@@ -16,7 +16,7 @@ export class MLModelCreateInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: false
   })
-  modelJSON!: string;
+  modelJson!: string;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true

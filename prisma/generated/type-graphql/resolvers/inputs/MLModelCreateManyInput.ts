@@ -15,7 +15,7 @@ export class MLModelCreateManyInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: false
   })
-  modelJSON!: string;
+  modelJson!: string;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true
@@ -25,5 +25,5 @@ export class MLModelCreateManyInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: false
   })
-  projectID!: string;
+  projectId!: string;
 }

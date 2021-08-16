@@ -33,7 +33,7 @@ export class MLModelWhereInput {
   @TypeGraphQL.Field(_type => StringFilter, {
     nullable: true
   })
-  modelJSON?: StringFilter | undefined;
+  modelJson?: StringFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringNullableFilter, {
     nullable: true
@@ -48,5 +48,5 @@ export class MLModelWhereInput {
   @TypeGraphQL.Field(_type => StringFilter, {
     nullable: true
   })
-  projectID?: StringFilter | undefined;
+  projectId?: StringFilter | undefined;
 }

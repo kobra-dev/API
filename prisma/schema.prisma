@@ -34,10 +34,10 @@ model Project {
 
 model MLModel {
   id              String  @id
-  modelJSON       String 
+  modelJson       String 
   modelParams     String?
-  project         Project @relation(fields: [projectID], references: [id])
-  projectID       String
+  project         Project @relation(fields: [projectId], references: [id])
+  projectId       String
 }
 
 model User {

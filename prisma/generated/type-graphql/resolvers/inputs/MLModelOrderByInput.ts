@@ -16,7 +16,7 @@ export class MLModelOrderByInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
-  modelJSON?: "asc" | "desc" | undefined;
+  modelJson?: "asc" | "desc" | undefined;
 
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
@@ -26,5 +26,5 @@ export class MLModelOrderByInput {
   @TypeGraphQL.Field(_type => SortOrder, {
     nullable: true
   })
-  projectID?: "asc" | "desc" | undefined;
+  projectId?: "asc" | "desc" | undefined;
 }

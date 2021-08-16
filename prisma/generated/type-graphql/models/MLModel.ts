@@ -16,7 +16,7 @@ export class MLModel {
   @TypeGraphQL.Field(_type => String, {
     nullable: false
   })
-  modelJSON!: string;
+  modelJson!: string;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true
@@ -28,5 +28,5 @@ export class MLModel {
   @TypeGraphQL.Field(_type => String, {
     nullable: false
   })
-  projectID!: string;
+  projectId!: string;
 }

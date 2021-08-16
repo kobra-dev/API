@@ -35,5 +35,5 @@ export class FindManyMLModelArgs {
   @TypeGraphQL.Field(_type => [MLModelScalarFieldEnum], {
     nullable: true
   })
-  distinct?: Array<"id" | "modelJSON" | "modelParams" | "projectID"> | undefined;
+  distinct?: Array<"id" | "modelJson" | "modelParams" | "projectId"> | undefined;
 }

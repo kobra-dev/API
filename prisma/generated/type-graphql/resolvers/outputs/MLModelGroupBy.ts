@@ -18,7 +18,7 @@ export class MLModelGroupBy {
   @TypeGraphQL.Field(_type => String, {
     nullable: false
   })
-  modelJSON!: string;
+  modelJson!: string;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true
@@ -28,7 +28,7 @@ export class MLModelGroupBy {
   @TypeGraphQL.Field(_type => String, {
     nullable: false
   })
-  projectID!: string;
+  projectId!: string;
 
   @TypeGraphQL.Field(_type => MLModelCountAggregate, {
     nullable: true

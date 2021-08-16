@@ -15,7 +15,7 @@ export class MLModelCreateWithoutProjectInput {
   @TypeGraphQL.Field(_type => String, {
     nullable: false
   })
-  modelJSON!: string;
+  modelJson!: string;
 
   @TypeGraphQL.Field(_type => String, {
     nullable: true

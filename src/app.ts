@@ -1,24 +1,18 @@
-//#region Imports
-
-// GraphQL
-// Prisma
 import { PrismaClient } from "@prisma/client";
 import { ApolloServer } from "apollo-server";
-// Misc
 import dotenv from "dotenv";
-// Auth
 import FirebaseAdmin from "firebase-admin";
 import fs from "fs";
 import "reflect-metadata";
 import { buildSchema } from "type-graphql";
 import { Container } from "typedi";
+// We can use the generated one because in order to have access to a model you have to have access to its project, so we don't need additional authentication
+import { MLModelRelationsResolver } from "../prisma/generated/type-graphql";
+import MLModelResolver from "./resolvers/MLModelResolver";
 import ProjectRelationsResolver from "./resolvers/ProjectRelationsResolver";
-// Resolvers
 import ProjectResolver from "./resolvers/ProjectResolver";
 import UserRelationsResolver from "./resolvers/UserRelationsResolver";
 import UserResolver from "./resolvers/UserResolver";
-
-//#endregion
 
 dotenv.config();
 
@@ -51,8 +45,10 @@ async function main() {
     resolvers: [
       ProjectResolver,
       UserResolver,
+      MLModelResolver,
       ProjectRelationsResolver,
       UserRelationsResolver,
+      MLModelRelationsResolver
     ],
     container: Container,
   });

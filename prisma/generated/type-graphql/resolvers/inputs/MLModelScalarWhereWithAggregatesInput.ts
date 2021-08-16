@@ -32,7 +32,7 @@ export class MLModelScalarWhereWithAggregatesInput {
   @TypeGraphQL.Field(_type => StringWithAggregatesFilter, {
     nullable: true
   })
-  modelJSON?: StringWithAggregatesFilter | undefined;
+  modelJson?: StringWithAggregatesFilter | undefined;
 
   @TypeGraphQL.Field(_type => StringNullableWithAggregatesFilter, {
     nullable: true
@@ -42,5 +42,5 @@ export class MLModelScalarWhereWithAggregatesInput {
   @TypeGraphQL.Field(_type => StringWithAggregatesFilter, {
     nullable: true
   })
-  projectID?: StringWithAggregatesFilter | undefined;
+  projectId?: StringWithAggregatesFilter | undefined;
 }

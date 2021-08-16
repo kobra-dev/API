@@ -2,9 +2,9 @@ import * as TypeGraphQL from "type-graphql";
 
 export enum MLModelScalarFieldEnum {
   id = "id",
-  modelJSON = "modelJSON",
+  modelJson = "modelJson",
   modelParams = "modelParams",
-  projectID = "projectID"
+  projectId = "projectId"
 }
 TypeGraphQL.registerEnumType(MLModelScalarFieldEnum, {
   name: "MLModelScalarFieldEnum",
