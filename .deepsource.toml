@@ -1,5 +1,11 @@
 version = 1
 
+exclude_patterns = [
+  "prisma/generated",
+  "prisma/migrations",
+  "src/generated"
+]
+
 [[analyzers]]
 name = "javascript"
 enabled = true
