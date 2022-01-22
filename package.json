@@ -28,7 +28,7 @@
     "marked": "^2.1.1",
     "marked-plaintext": "^0.0.2",
     "multer": "^1.4.2",
-    "nanoid": "^3.1.20",
+    "nanoid": "^3.1.31",
     "reflect-metadata": "^0.1.13",
     "ts-node": "^9.0.0",
     "ts-replace-all": "^1.0.0",
