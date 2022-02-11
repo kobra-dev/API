@@ -25,7 +25,7 @@
     "graphql-fields": "^2.0.3",
     "graphql-scalars": "^1.8.0",
     "mailgun.js": "^3.4.0",
-    "marked": "^2.1.1",
+    "marked": "^4.0.10",
     "marked-plaintext": "^0.0.2",
     "multer": "^1.4.2",
     "nanoid": "^3.1.31",
